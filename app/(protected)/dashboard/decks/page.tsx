@@ -77,7 +77,7 @@ export default function DecksPage() {
   }, [filters, pagination.page, pagination.limit]);
 
   const handleFiltersChange = (newFilters: DeckFiltersType) => {
-    const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams(searchParams.toString());
     
     Object.entries(newFilters).forEach(([key, value]) => {
       if (value) {
