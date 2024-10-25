@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html class="mt-0" lang="fr">
+
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name='robots' content='noindex, follow' />
+
+	<title>Page non trouvée - 42</title>
+	<meta property="og:locale" content="fr_FR" />
+	<meta property="og:title" content="Page non trouvée - 42" />
+	<meta property="og:site_name" content="42" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://42.fr/#organization","name":"42","url":"https://42.fr/","sameAs":["https://www.instagram.com/42.born2code/","https://www.linkedin.com/school/42born2code/","https://www.youtube.com/c/42born2code","https://www.facebook.com/42born2code","https://twitter.com/42born2code"],"logo":{"@type":"ImageObject","inLanguage":"fr-FR","@id":"https://42.fr/#/schema/logo/image/","url":"https://42.fr/wp-content/uploads/2021/08/42.jpg","contentUrl":"https://42.fr/wp-content/uploads/2021/08/42.jpg","width":1201,"height":1201,"caption":"42"},"image":{"@id":"https://42.fr/#/schema/logo/image/"}},{"@type":"WebSite","@id":"https://42.fr/#website","url":"https://42.fr/","name":"42","description":"","publisher":{"@id":"https://42.fr/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://42.fr/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"fr-FR"}]}</script>
+
+
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://42.fr/wp-includes/css/dist/block-library/style.min.css?ver=5.8.10' type='text/css' media='all' />
+<link rel='stylesheet' id='myearth-style-css'  href='https://42.fr/wp-content/plugins/wordpress-miniature-earth/myearth.css?ver=1625636383' type='text/css' media='all' />
+<link rel='stylesheet' id='main-css'  href='https://42.fr/wp-content/themes/42/assets/build/main.c170b05b9b237751b76d.css?ver=5.8.10' type='text/css' media='all' />
+<link rel='stylesheet' id='ableplayer-css-css'  href='https://42.fr/wp-content/themes/42/assets/ableplayer/build/ableplayer.min.css?ver=5.8.10' type='text/css' media='all' />
+<script type='text/javascript' src='https://42.fr/wp-content/plugins/wordpress-miniature-earth/miniature.earth.loader.js?ver=1.0' id='earth-loader-script-js'></script>
+<script type='text/javascript' src='https://42.fr/wp-content/plugins/wordpress-miniature-earth/myearth.js?ver=1625636383' id='myearth-script-js'></script>
+<script type='text/javascript' src='https://42.fr/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://42.fr/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='https://42.fr/wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.7' id='regenerator-runtime-js'></script>
+<script type='text/javascript' src='https://42.fr/wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0' id='wp-polyfill-js'></script>
+<script type='text/javascript' src='https://42.fr/wp-includes/js/dist/hooks.min.js?ver=a7edae857aab69d69fa10d5aef23a5de' id='wp-hooks-js'></script>
+<script type='text/javascript' src='https://42.fr/wp-includes/js/dist/i18n.min.js?ver=5f1269854226b4dd90450db411a12b79' id='wp-i18n-js'></script>
+<script type='text/javascript' id='wp-i18n-js-after'>
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+</script>
+<script type='text/javascript' id='js-js-extra'>
+/* <![CDATA[ */
+var ajax_posts = {"ajaxurl":"https:\/\/42.fr\/wp-admin\/admin-ajax.php","noposts":"No older posts found"};
+var ajax_cities = {"ajaxurl":"https:\/\/42.fr\/wp-admin\/admin-ajax.php","noposts":"No older posts found"};
+var ajax_taxonomy = {"ajaxurl":"https:\/\/42.fr\/wp-admin\/admin-ajax.php","noposts":"No older posts found"};
+var ajax_get_city = {"ajaxurl":"https:\/\/42.fr\/wp-admin\/admin-ajax.php","noposts":"No older posts found"};
+/* ]]> */
+</script>
+<script type='text/javascript' id='js-js-translations'>
+( function( domain, translations ) {
+	var localeData = translations.locale_data[ domain ] || translations.locale_data.messages;
+	localeData[""].domain = domain;
+	wp.i18n.setLocaleData( localeData, domain );
+} )( "fortytwo", { "locale_data": { "messages": { "": {} } } } );
+</script>
+<script type='text/javascript' src='https://42.fr/wp-content/themes/42/assets/build/main.c170b05b9b237751b76d.js?ver%5B0%5D=wp-i18n' id='js-js'></script>
+<link rel="https://api.w.org/" href="https://42.fr/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://42.fr/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://42.fr/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8.10" />
+<meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" /><script defer src="https://analytics.42paris.fr/script.js" data-website-id="9dab66d3-ca14-4b13-bca2-fce922229c77"></script>
+
+<script>
+	(_axcb = window._axcb || []).push(function(sdk) {
+		sdk.on('cookies:complete', function(choices){
+			document
+				.querySelectorAll('[data-hide-on-vendor-consent]')
+				.forEach(el => {
+				const vendor = el.getAttribute('data-hide-on-vendor-consent');
+				el.style.display = choices[vendor] ? 'none' : 'inherit';
+			});
+			document
+				.querySelectorAll('[data-requires-vendor-consent]')
+				.forEach(el => {
+				const vendor = el.getAttribute('data-requires-vendor-consent');
+				if (choices[vendor]) {
+					el.setAttribute('src', el.getAttribute('data-src'));
+				}
+			});
+		});
+	});
+</script><link rel="icon" href="https://42.fr/wp-content/uploads/2021/07/cropped-42-favicon-acs-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://42.fr/wp-content/uploads/2021/07/cropped-42-favicon-acs-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://42.fr/wp-content/uploads/2021/07/cropped-42-favicon-acs-180x180.png" />
+<meta name="msapplication-TileImage" content="https://42.fr/wp-content/uploads/2021/07/cropped-42-favicon-acs-270x270.png" />
+    </head>
+    <body>
+        <a href="#main" class="sr-only go-to-content">Aller au contenu</a>
+        <header role="banner">
+          <div class="navbar-global navbar-fixed-top row m-0">
+            <div class="insert order-3 order-1024-1 col-lg-12 p-0">
+              <div class="d-none flex-row-reverse flex-1024-row d--lg--flex top-nav justify-content-between align-items-center">
+                <div class="h--col"><div class="menu-topnav-fr-container"><ul id="menu-topnav-fr" class="menu"><li id="menu-item-1112" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1112 nav-item"><a href="https://42.fr/alumni/" class="nav-link">Alumni</a></li>
+<li id="menu-item-2407" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2407 nav-item"><a href="https://42.fr/entreprises/actions-de-recrutement-et-de-formation/" class="nav-link">Entreprises</a></li>
+<li id="menu-item-2408" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2408 nav-item"><a href="https://42.fr/entreprises/taxe-dapprentissage-et-dons/" class="nav-link">Taxe d’apprentissage</a></li>
+<li id="menu-item-1113" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1113 nav-item"><a href="https://42.fr/presse/" class="nav-link">Presse</a></li>
+</ul></div></div>                <div class="align-items-center d-flex justify-content-between"> 
+                                    <select name="lang_choice_1" id='lang_choice_1' title='Langue du site (rechargement automatique)'>
+	<option value="fr" selected='selected'>FR</option>
+	<option value="en">EN</option>
+
+</select>
+<script type="text/javascript">
+					//<![CDATA[
+					var urls_1 = {"fr":"https:\/\/42.fr\/","en":"https:\/\/42.fr\/en\/homepage\/"};
+					document.getElementById( "lang_choice_1" ).onchange = function() {
+						location.href = urls_1[this.value];
+					}
+					//]]>
+				</script>                                    <div class="footer--col"><h2 class="sn--title sr-only">Suivez-nous</h2><div class="footer__social">
+                        <a target="_blank" class="text-decoration-none" href="https://twitter.com/42born2code" title="42 sur Twitter">
+                <svg focusable="false" aria-hidden="true" class="icon--twitter"><use xlink:href="https://42.fr/wp-content/themes/42/assets/images/socialnetworks.svg#twitter"></use></svg>                <span class="sr-only">42 sur Twitter</span>
+            </a>
+                                <a target="_blank" class="text-decoration-none" href="https://www.facebook.com/42born2code" title="42 sur Facebook">
+                <svg focusable="false" aria-hidden="true" class="icon--facebook"><use xlink:href="https://42.fr/wp-content/themes/42/assets/images/socialnetworks.svg#facebook"></use></svg>                <span class="sr-only">42 sur Facebook</span>
+            </a>
+                                <a target="_blank" class="text-decoration-none" href="https://www.linkedin.com/school/42born2code" title="42 sur LinkedIn">
+                <svg focusable="false" aria-hidden="true" class="icon--linkedin"><use xlink:href="https://42.fr/wp-content/themes/42/assets/images/socialnetworks.svg#linkedin"></use></svg>                <span class="sr-only">42 sur LinkedIn</span>
+            </a>
+                                <a target="_blank" class="text-decoration-none" href="https://www.instagram.com/42.born2code/" title="42 sur Instagram">
+                <svg focusable="false" aria-hidden="true" class="icon--instagram"><use xlink:href="https://42.fr/wp-content/themes/42/assets/images/socialnetworks.svg#instagram"></use></svg>                <span class="sr-only">42 sur Instagram</span>
+            </a>
+                                <a target="_blank" class="text-decoration-none" href="https://medium.com/@42-born2code" title="42 sur Medium">
+                <svg focusable="false" aria-hidden="true" class="icon--medium"><use xlink:href="https://42.fr/wp-content/themes/42/assets/images/socialnetworks.svg#medium"></use></svg>                <span class="sr-only">42 sur Medium</span>
+            </a>
+            </div></div>                </div>
+              </div>
+            </div>
+                          <div class="order-1 order-1024-2 col-lg-12 p-0">
+                <div class="py-1 px-1 px-md-3 alert--message--container">
+                  <div class="d-flex justify-content-center align-items-center flex-column flex-lg-row">
+                    <div class="alert--message">			<div class="textwidget"><p>👩‍💻 La Tech pour Toutes : trois jours pour découvrir le numérique du 15 au 17 novembre. Gratuit, ouvert à tous&#8230; mais surtout à toutes ! <a href="https://latechpourtoutes.fr/">Réservez votre place</a></p>
+</div>
+		</div>                    <button id="close-alert" type="button" class="ml-lg-2 close close-alert d-flex" data-dismiss="alert">
+                      <span class="sr-only"> Fermer le bandeau d’annonce </span>
+                      <svg focusable="false" aria-hidden="true" width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                              <g transform="translate(-5.000000, -5.000000)" fill="#2E3A59" fill-rule="nonzero">
+                                  <g>
+                                      <path d="M17.5900002,5 L12,10.5900002 L6.40999997,5 L5,6.40999997 L10.5900002,12 L5,17.5900002 L6.40999997,19 L12,13.4099998 L17.5900002,19 L19,17.5900002 L13.4099998,12 L19,6.40999997 L17.5900002,5 Z"></path>
+                                  </g>
+                              </g>
+                          </g>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+                        
+            <div class="order-2 order-1024-3 col-lg-12 p-0">
+              <nav role="navigation" class="position-relative main-navbar navbar navbar-expand-lg d-flex justify-content-between align-items-center flex-wrap">
+                <a class="navbar-brand" href="https://42.fr/"><img alt="Accueil École 42" src="https://42.fr/wp-content/uploads/2021/05/42-Final-sigle-seul.svg"></a>
+                <button class="menu-burger d-block d--lg--none pr-1">
+                <span class="sr-only"> Ouvrir le menu </span>
+                <svg focusable="false" aria-hidden="true" width="27" height="13" viewBox="0 0 27 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M27 0H0V2H27V0Z" fill="black"/>
+                <path d="M27 5.5H0V7.5H27V5.5Z" fill="black"/>
+                <path d="M27 11H0V13H27V11Z" fill="black"/>
+                </svg>
+                </button>
+                <div class="close--btn--menu d--lg--none">
+                <button type="button" class="ml-lg-2 close close--menu-nav" data-dismiss="close-menu">
+                <span class="sr-only"> Fermer le menu </span>
+                  <svg aria-hidden="true" focusable="false" width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                          <g transform="translate(-5.000000, -5.000000)" fill="#2E3A59" fill-rule="nonzero">
+                              <g>
+                                  <path d="M17.5900002,5 L12,10.5900002 L6.40999997,5 L5,6.40999997 L10.5900002,12 L5,17.5900002 L6.40999997,19 L12,13.4099998 L17.5900002,19 L19,17.5900002 L13.4099998,12 L19,6.40999997 L17.5900002,5 Z"></path>
+                              </g>
+                          </g>
+                      </g>
+                  </svg>
+                </button>
+                </div>
+                <div class="collapsed dropdown-container dropdown-container-slidemorph">
+                  <ul id="menu-navigation-fr" class="navbar-nav dropdown--menu position-relative"><li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-2409" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children dropdown menu-item-2409 nav-item nav-item"><button title="Le campus de Paris" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link" id="menu-item-dropdown-2409">Le campus de Paris</button>
+<ul class="dropdown-menu">
+	<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-0" class="previous-menu-btn menu-item menu-item-type-custom menu-item-object-custom menu-item-type-button menu-item-0 nav-item nav-item"><a title="Menu principal" href="#" class="nav-link">Menu principal</a></li>
+	<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-137" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-137 nav-item nav-item"><a title="Le campus" href="https://42.fr/le-campus-de-paris/42-paris-campus/" class="nav-link">Le campus</a></li>
+	<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-6138" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6138 nav-item nav-item"><a title="NOC 42 : Tout, sauf un campus" href="https://42.fr/le-campus-de-paris/noc-42/" class="nav-link">NOC 42 : Tout, sauf un campus</a></li>
+	<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-5895" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5895 nav-item nav-item"><a title="Forty2 : le campus délocalisé" href="https://42.fr/le-campus-de-paris/forty2/" class="nav-link">Forty2 : le campus délocalisé</a></li>
+	<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-129" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-129 nav-item nav-item"><a title="Vie étudiante" href="https://42.fr/le-campus-de-paris/vie-sur-le-campus/" class="nav-link">Vie étudiante</a></li>
+	<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-1265" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1265 nav-item nav-item"><a title="Formation proposée" href="https://42.fr/le-campus-de-paris/diplome-informatique/" class="nav-link">Formation proposée</a></li>
+	<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-5170" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5170 nav-item nav-item"><a title="42 Start-Up Club" href="https://42.fr/le-campus-de-paris/42-start-up-club/" class="nav-link">42 Start-Up Club</a></li>
+</ul>
+</li>
+<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-2637" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children dropdown menu-item-2637 nav-item nav-item"><button title="42 C’est quoi ?" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link" id="menu-item-dropdown-2637">42 C’est quoi ?</button>
+<ul class="dropdown-menu">
+	<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="previous-menu-btn menu-item menu-item-type-custom menu-item-object-custom menu-item-type-button menu-item-0 nav-item nav-item"><a title="Menu principal" href="#" class="nav-link">Menu principal</a></li>
+	<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-403" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-403 nav-item nav-item"><a title="Un concept unique" href="https://42.fr/42-cest-quoi/le-programme-42-explique/" class="nav-link">Un concept unique</a></li>
+	<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-410" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-410 nav-item nav-item"><a title="La méthode 42" href="https://42.fr/42-cest-quoi/la-methode-42/" class="nav-link">La méthode 42</a></li>
+	<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-1021" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1021 nav-item nav-item"><a title="L’équipe" href="https://42.fr/42-cest-quoi/personnel-de-42/" class="nav-link">L’équipe</a></li>
+</ul>
+</li>
+<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-2638" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children dropdown menu-item-2638 nav-item nav-item"><button title="Le programme" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link" id="menu-item-dropdown-2638">Le programme</button>
+<ul class="dropdown-menu">
+	<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="previous-menu-btn menu-item menu-item-type-custom menu-item-object-custom menu-item-type-button menu-item-0 nav-item nav-item"><a title="Menu principal" href="#" class="nav-link">Menu principal</a></li>
+	<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-1025" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1025 nav-item nav-item"><a title="Le code source" href="https://42.fr/le-programme/apprentissage-innovant/" class="nav-link">Le code source</a></li>
+	<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-1026" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1026 nav-item nav-item"><a title="L’exécution" href="https://42.fr/le-programme/methode-travail/" class="nav-link">L’exécution</a></li>
+	<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-1027" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1027 nav-item nav-item"><a title="Stages et professionnalisation" href="https://42.fr/le-programme/stages-et-professionnalisation/" class="nav-link">Stages et professionnalisation</a></li>
+</ul>
+</li>
+<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-94" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-94 nav-item nav-item"><a title="Le réseau mondial" href="https://42.fr/le-reseau-mondial/" class="nav-link">Le réseau mondial</a></li>
+<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-2639" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children dropdown menu-item-2639 nav-item nav-item"><button title="Admissions" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link" id="menu-item-dropdown-2639">Admissions</button>
+<ul class="dropdown-menu">
+	<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="previous-menu-btn menu-item menu-item-type-custom menu-item-object-custom menu-item-type-button menu-item-0 nav-item nav-item"><a title="Menu principal" href="#" class="nav-link">Menu principal</a></li>
+	<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-1083" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1083 nav-item nav-item"><a title="Le processus d’admission" href="https://42.fr/admissions/admissions/" class="nav-link">Le processus d’admission</a></li>
+	<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-1084" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1084 nav-item nav-item"><a title="La piscine de 42" href="https://42.fr/admissions/42-piscine/" class="nav-link">La piscine de 42</a></li>
+</ul>
+</li>
+<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-92" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-92 nav-item nav-item"><a title="Après 42" href="https://42.fr/apres-42/" class="nav-link">Après 42</a></li>
+<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-1077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1077 nav-item nav-item"><a title="FAQ" href="https://42.fr/tout-savoir-sur-faq/" class="nav-link">FAQ</a></li>
+<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-90" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-90 nav-item nav-item"><a title="Contact" href="https://42.fr/entrer-en-contact/" class="nav-link">Contact</a></li>
+</ul>                </div>
+
+                <div class="text-center e--link--container"><ul id="menu-nav-cta-fr" class="e--link d-none d--lg--flex"><li id="menu-item-3288" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3288 nav-item"><a href="https://admissions.42.fr" class="nav-link">Postuler à Paris</a></li>
+</ul></div>              </nav>
+            </div>
+          </div>
+        </header>
+        <main role="main" id="main">
+
+<div class="hero--section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                <div class="hero--wrapper">
+                    <img loading="lazy" class="img-fluid" src="https://hbb9mnex3jsxcwzc.42.fr/wp-content/uploads/2021/07/DSC_3258.jpg" alt="">
+                    <div class="container hero--content d-flex pt-3">
+                        <div class="col-lg-12 d-flex justify-content-center align-items-center align-items-md-start flex-column">
+                            <h1 data-aos="fade-up" class="text-white h1 text-center text-sm-left">Ne paniquez pas</h1>
+                            <p  data-aos="fade-up" class="text-white hero--stagline">Don't panic</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-richtext py-2 py-lg-5">
+    <div class="container">
+        <div class="row">
+            <div class="mx-auto offset-lg-4 col-lg-8">
+                    <div class="d-flex justify-content-center align-items-center flex-column">
+                        <div data-aos="fade-up" class="r--blue-shape mb-2"></div>
+                        <h3 data-aos="fade-up" class="font--blue h3 text-center">page introuvable</h3>
+                        <div  data-aos="fade-up" class="description mt-2 text-center">
+                                <p>Peut-être souhaitez-vous revenir sur la <a href="https://42.fr/">page d'accueil</a>.
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </main>
+        <script>
+window.axeptioSettings = {
+  clientId: "65fd4c4f0f1ce65d5ff49443",
+  cookiesVersion: "42.fr-fr-EU",
+  googleConsentMode: {
+    default: {
+      analytics_storage: "denied",
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+      wait_for_update: 500
+    }
+  }
+};
+ 
+(function(d, s) {
+  var t = d.getElementsByTagName(s)[0], e = d.createElement(s);
+  e.async = true; e.src = "https://static.axept.io/sdk.js";
+  t.parentNode.insertBefore(e, t);
+})(document, "script");
+
+    function loadGoogleAnalyticsTag() {
+      const t = document.getElementsByTagName("script")[0];
+      const e = document.createElement("script");
+      e.async = true;
+      e.src = "https://www.googletagmanager.com/gtag/js?id=G-ZPJQSRHJCC";
+      t.parentNode.insertBefore(e, t);
+      window.dataLayer = window.dataLayer || [];
+  
+      function gtag() {
+       dataLayer.push(arguments);
+      }
+  
+      gtag("js", new Date());
+      gtag("config", "G-ZPJQSRHJCC");
+    }
+  
+    function loadFacebookPixelTag() {
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+  
+      fbq('init', '4317238725019534');
+      fbq('track', 'PageView');
+    }
+  
+    void 0 === window._axcb && (window._axcb = []);
+    window._axcb.push(function (axeptio) {
+      axeptio.on("cookies:complete", function (choices) {
+        if (choices.google_analytics) {
+          loadGoogleAnalyticsTag();
+        }
+        if (choices.facebook_pixel) {
+          loadFacebookPixelTag();
+        }
+      });
+    });
+
+    </script><script type='text/javascript' src='https://42.fr/wp-content/themes/42/assets/ableplayer/build/ableplayer.dist.js?ver=1.0.1' id='ableplayer-js-js'></script>
+<script type='text/javascript' src='https://42.fr/wp-includes/js/wp-embed.min.js?ver=5.8.10' id='wp-embed-js'></script>
+<script type='text/javascript'>
+(function() {
+				var expirationDate = new Date();
+				expirationDate.setTime( expirationDate.getTime() + 31536000 * 1000 );
+				document.cookie = "pll_language=fr; expires=" + expirationDate.toUTCString() + "; path=/; secure; SameSite=Lax";
+			}());
+</script>
+        <footer role="contentinfo" class="footer text-white">
+            <div class="container">
+                <div class="row mb-3">
+                    <div class="col-sm-4 col-sm-4 col-lg-3">
+                        <a class="f--logo d-block text-decoration-none" href="https://42.fr/"><img
+                                alt="Accueil École 42"
+                                src="https://42.fr/wp-content/uploads/2021/05/42-Final-sigle-seul.svg"></a>
+                        <div class="footer--col">			<div class="textwidget"><p class="p1"><span class="s1">96 boulevard Bessières &#8211; 75017 Paris</span></p>
+<p class="p1"><span class="s1">Établissement d’enseignement supérieur privé technique </span></p>
+<p class="p1"><span class="s1">Organisme à but non lucratif</span></p>
+<p class="p1"><span class="s1">42 est labellisée <a href="https://www.grandeecolenumerique.fr/" target="_blank" rel="noopener">GEN</a></span></p>
+<p class="p1"><span class="s1">42 est certifiée <a href="/nos-engagements/qualiopi/">Qualiopi</a></span></p>
+</div>
+		</div>                        <div class="footer--col"><h2 class="sn--title sr-only">Suivez-nous</h2><div class="footer__social">
+                        <a target="_blank" class="text-decoration-none" href="https://twitter.com/42born2code" title="42 sur Twitter">
+                <svg focusable="false" aria-hidden="true" class="icon--twitter"><use xlink:href="https://42.fr/wp-content/themes/42/assets/images/socialnetworks.svg#twitter"></use></svg>                <span class="sr-only">42 sur Twitter</span>
+            </a>
+                                <a target="_blank" class="text-decoration-none" href="https://www.facebook.com/42born2code" title="42 sur Facebook">
+                <svg focusable="false" aria-hidden="true" class="icon--facebook"><use xlink:href="https://42.fr/wp-content/themes/42/assets/images/socialnetworks.svg#facebook"></use></svg>                <span class="sr-only">42 sur Facebook</span>
+            </a>
+                                <a target="_blank" class="text-decoration-none" href="https://www.linkedin.com/school/42born2code" title="42 sur LinkedIn">
+                <svg focusable="false" aria-hidden="true" class="icon--linkedin"><use xlink:href="https://42.fr/wp-content/themes/42/assets/images/socialnetworks.svg#linkedin"></use></svg>                <span class="sr-only">42 sur LinkedIn</span>
+            </a>
+                                <a target="_blank" class="text-decoration-none" href="https://www.instagram.com/42.born2code/" title="42 sur Instagram">
+                <svg focusable="false" aria-hidden="true" class="icon--instagram"><use xlink:href="https://42.fr/wp-content/themes/42/assets/images/socialnetworks.svg#instagram"></use></svg>                <span class="sr-only">42 sur Instagram</span>
+            </a>
+                                <a target="_blank" class="text-decoration-none" href="https://medium.com/@42-born2code" title="42 sur Medium">
+                <svg focusable="false" aria-hidden="true" class="icon--medium"><use xlink:href="https://42.fr/wp-content/themes/42/assets/images/socialnetworks.svg#medium"></use></svg>                <span class="sr-only">42 sur Medium</span>
+            </a>
+            </div></div>                    </div>
+                    <div class="col-sm-8 col-sm-8  offset-lg-1 col-lg-8">
+                        <div class="footer--nav--custom"><div class="menu-footer-fr-container"><ul id="menu-footer-fr" class="menu"><li id="menu-item-4331" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-4331 nav-item"><a href="https://42.fr/le-campus-de-paris/" class="nav-link">Le campus de Paris</a>
+<ul class="sub-menu">
+	<li class="previous-menu-btn menu-item menu-item-type-custom menu-item-object-custom menu-item-type-button menu-item-0 nav-item"><a href="#" class="nav-link">Menu principal</a></li>
+	<li id="menu-item-4332" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4332 nav-item"><a href="https://42.fr/le-campus-de-paris/42-paris-campus/" class="nav-link">Le campus</a></li>
+	<li id="menu-item-6136" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6136 nav-item"><a href="https://42.fr/le-campus-de-paris/noc-42/" class="nav-link">NOC 42 : Tout, sauf un campus</a></li>
+	<li id="menu-item-5893" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5893 nav-item"><a href="https://42.fr/le-campus-de-paris/forty2/" class="nav-link">Forty2 : le campus délocalisé</a></li>
+	<li id="menu-item-4333" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4333 nav-item"><a href="https://42.fr/le-campus-de-paris/vie-sur-le-campus/" class="nav-link">Vie étudiante</a></li>
+	<li id="menu-item-4334" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4334 nav-item"><a href="https://42.fr/le-campus-de-paris/diplome-informatique/" class="nav-link">Formation proposée</a></li>
+	<li id="menu-item-5168" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5168 nav-item"><a href="https://42.fr/le-campus-de-paris/42-start-up-club/" class="nav-link">42 Start-Up Club</a></li>
+</ul>
+</li>
+<li id="menu-item-4337" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-4337 nav-item"><a href="https://42.fr/42-cest-quoi/" class="nav-link">42 c’est quoi ?</a>
+<ul class="sub-menu">
+	<li class="previous-menu-btn menu-item menu-item-type-custom menu-item-object-custom menu-item-type-button menu-item-0 nav-item"><a href="#" class="nav-link">Menu principal</a></li>
+	<li id="menu-item-4338" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4338 nav-item"><a href="https://42.fr/42-cest-quoi/le-programme-42-explique/" class="nav-link">Un concept unique</a></li>
+	<li id="menu-item-4339" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4339 nav-item"><a href="https://42.fr/42-cest-quoi/la-methode-42/" class="nav-link">La méthode 42</a></li>
+	<li id="menu-item-4340" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4340 nav-item"><a href="https://42.fr/42-cest-quoi/personnel-de-42/" class="nav-link">L’équipe</a></li>
+</ul>
+</li>
+<li id="menu-item-4341" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-4341 nav-item"><a href="https://42.fr/le-programme/" class="nav-link">Le programme</a>
+<ul class="sub-menu">
+	<li class="previous-menu-btn menu-item menu-item-type-custom menu-item-object-custom menu-item-type-button menu-item-0 nav-item"><a href="#" class="nav-link">Menu principal</a></li>
+	<li id="menu-item-4342" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4342 nav-item"><a href="https://42.fr/le-programme/apprentissage-innovant/" class="nav-link">Le code source</a></li>
+	<li id="menu-item-4343" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4343 nav-item"><a href="https://42.fr/le-programme/methode-travail/" class="nav-link">L’exécution</a></li>
+	<li id="menu-item-4344" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4344 nav-item"><a href="https://42.fr/le-programme/stages-et-professionnalisation/" class="nav-link">Stages et expériences professionnelles</a></li>
+</ul>
+</li>
+<li id="menu-item-4345" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4345 nav-item"><a href="https://42.fr/le-reseau-mondial/" class="nav-link">Le réseau mondial</a></li>
+<li id="menu-item-4346" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-4346 nav-item"><a href="https://42.fr/admissions/" class="nav-link">Admissions</a>
+<ul class="sub-menu">
+	<li class="previous-menu-btn menu-item menu-item-type-custom menu-item-object-custom menu-item-type-button menu-item-0 nav-item"><a href="#" class="nav-link">Menu principal</a></li>
+	<li id="menu-item-4347" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4347 nav-item"><a href="https://42.fr/admissions/admissions/" class="nav-link">Le processus</a></li>
+	<li id="menu-item-4348" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4348 nav-item"><a href="https://42.fr/admissions/trouver-42-campus/" class="nav-link">Sélectionner un campus</a></li>
+	<li id="menu-item-4349" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4349 nav-item"><a href="https://42.fr/admissions/42-piscine/" class="nav-link">La Piscine de 42</a></li>
+</ul>
+</li>
+<li id="menu-item-4350" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4350 nav-item"><a href="https://42.fr/apres-42/" class="nav-link">Après 42</a></li>
+<li id="menu-item-4351" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4351 nav-item"><a href="https://42.fr/tout-savoir-sur-faq/" class="nav-link">Tout savoir sur…</a></li>
+<li id="menu-item-4352" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4352 nav-item"><a href="https://42.fr/alumni/" class="nav-link">Alumni</a></li>
+<li id="menu-item-4353" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-4353 nav-item"><a href="https://42.fr/entreprises/" class="nav-link">Entreprises</a>
+<ul class="sub-menu">
+	<li class="previous-menu-btn menu-item menu-item-type-custom menu-item-object-custom menu-item-type-button menu-item-0 nav-item"><a href="#" class="nav-link">Menu principal</a></li>
+	<li id="menu-item-4354" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4354 nav-item"><a href="https://42.fr/entreprises/actions-de-recrutement-et-de-formation/" class="nav-link">Actions de recrutement et de formation</a></li>
+	<li id="menu-item-4355" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4355 nav-item"><a href="https://42.fr/entreprises/taxe-dapprentissage-et-dons/" class="nav-link">Taxe d’apprentissage et dons</a></li>
+</ul>
+</li>
+<li id="menu-item-4356" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4356 nav-item"><a href="https://42.fr/presse/" class="nav-link">Presse</a></li>
+<li id="menu-item-6016" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-6016 nav-item"><a href="https://42.fr/nos-engagements/qualite/" class="nav-link">Nos engagements</a>
+<ul class="sub-menu">
+	<li class="previous-menu-btn menu-item menu-item-type-custom menu-item-object-custom menu-item-type-button menu-item-0 nav-item"><a href="#" class="nav-link">Menu principal</a></li>
+	<li id="menu-item-6512" class="previous-menu-btn menu-item menu-item-type-custom menu-item-object-custom menu-item-type-button menu-item-6512 nav-item"><a class="nav-link">Menu principal</a></li>
+	<li id="menu-item-6017" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6017 nav-item"><a href="https://42.fr/nos-engagements/qualite/" class="nav-link">Démarche qualité</a></li>
+	<li id="menu-item-6063" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6063 nav-item"><a href="https://42.fr/nos-engagements/plan-inclusion/" class="nav-link">Diversité, inclusion et égalité des chances</a></li>
+	<li id="menu-item-6195" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6195 nav-item"><a href="https://42.fr/nos-engagements/qualiopi/" class="nav-link">Qualiopi</a></li>
+	<li id="menu-item-6511" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6511 nav-item"><a href="https://42.fr/nos-engagements/renouvellement-rncp-6/" class="nav-link">Renouvellement titre RNCP 6</a></li>
+	<li id="menu-item-6630" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6630 nav-item"><a href="https://42.fr/nos-engagements/renouvellement-rncp-7/" class="nav-link">Renouvellement titre RNCP 7</a></li>
+</ul>
+</li>
+<li id="menu-item-4357" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4357 nav-item"><a href="https://42.fr/entrer-en-contact/" class="nav-link">Contact</a></li>
+</ul></div></div>                    </div>
+                </div>
+                <div class="col-lg-12 sub-links"></div>
+                <div class="row mt-2 pb-2 pb-sm-0 pb-md-0 pb-lg-2 d-flex align-items-center">
+
+                    <div class="col-lg-4 order-2 order-lg-1 text-center text-lg-left">
+                        <p class='footer--credits'>
+                            © 2024 Association 42 - Tous droits réservés</p>
+                    </div>
+                    <div class="col-lg-8 order-1 order-lg-2">
+                        <div class="footer--submenu--custom"><div class="menu-subfields-fr-container"><ul id="menu-subfields-fr" class="menu"><li id="menu-item-119" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-119 nav-item"><a href="https://42.fr/mentions-legales/" class="nav-link">Mentions légales</a></li>
+<li id="menu-item-118" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-118 nav-item"><a href="https://42.fr/cgu/" class="nav-link">CGU</a></li>
+<li id="menu-item-117" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-117 nav-item"><a href="https://42.fr/cgs/" class="nav-link">CGS</a></li>
+<li id="menu-item-1634" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-1634 nav-item"><a href="https://42.fr/politique-de-confidentialite/" class="nav-link">Politique de confidentialité</a></li>
+<li id="menu-item-3811" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3811 nav-item"><a href="https://42.fr/plan-du-site/" class="nav-link">Plan du site</a></li>
+<li id="menu-item-5162" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5162 nav-item"><a href="https://www.welcometothejungle.com/fr/companies/association-42" class="nav-link">Emploi : 42 recrute !</a></li>
+</ul></div></div>                    </div>
+                </div>
+            </div>
+        </footer>
+        </body>
+        <script>
+            window.onload = function () {
+                let closedBanner = "";
+                if (sessionStorage['closedBanner'])
+                    $('.alert--message--container').remove();
+
+                document.getElementById('close-alert').addEventListener('click', function (e) {
+                    e.preventDefault();
+                    $('.alert--message--container').remove();
+                    closedBanner = true;
+                    sessionStorage['closedBanner'] = JSON.stringify(closedBanner);
+                    const readValue = JSON.parse(sessionStorage['closedBanner']);
+                    console.log('readsession', readValue);
+                }, false);
+            }
+        </script>
+
+        </html>
