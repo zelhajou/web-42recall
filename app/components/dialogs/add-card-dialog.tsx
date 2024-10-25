@@ -2,7 +2,6 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import {
   Dialog,
   DialogContent,
@@ -15,97 +14,62 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Loader2, Plus } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
+import { Card } from '@/types/deck';
 
 interface AddCardDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   deckId: string;
-  onCardsAdded?: () => void; // Add this callback
+  onAddCards: (cards: Omit<Card, 'id' | 'deckId' | 'createdAt' | 'updatedAt' | 'order'>[]) => Promise<void>;
 }
 
-export function AddCardDialog({ 
-  open, 
-  onOpenChange, 
+export function AddCardDialog({
+  open,
+  onOpenChange,
   deckId,
-  onCardsAdded 
+  onAddCards,
 }: AddCardDialogProps) {
-  const router = useRouter();
-  const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
-  const [cards, setCards] = useState<any[]>([
+  const [cards, setCards] = useState<Array<{ front: string; back: string; hint?: string; code?: string }>>([
     { front: '', back: '', hint: '', code: '' }
   ]);
-
-  const addCard = () => {
-    setCards([...cards, { front: '', back: '', hint: '', code: '' }]);
-  };
-
-  const updateCard = (index: number, field: string, value: string) => {
-    const newCards = [...cards];
-    newCards[index] = { ...newCards[index], [field]: value };
-    setCards(newCards);
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
-      // Filter out empty cards
       const validCards = cards.filter(card => card.front.trim() && card.back.trim());
       
       if (validCards.length === 0) {
         throw new Error('At least one card is required');
       }
 
-      const response = await fetch(`/api/decks/${deckId}/cards`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          cards: validCards.map(card => ({
-            front: card.front.trim(),
-            back: card.back.trim(),
-            hint: card.hint.trim() || null,
-            code: card.code.trim() || null,
-          }))
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to add cards');
-      }
-
-      toast({
-        title: 'Cards added',
-        description: `Successfully added ${validCards.length} cards to the deck.`,
-      });
-
+      await onAddCards(validCards);
+      
       // Reset form
       setCards([{ front: '', back: '', hint: '', code: '' }]);
-      
-      // Close dialog
       onOpenChange(false);
-      
-      // Trigger refresh
-      router.refresh();
-      
-      // Call the callback if provided
-      onCardsAdded?.();
     } catch (error) {
       console.error('Error adding cards:', error);
-      toast({
-        variant: 'destructive',
-        title: 'Error',
-        description: error instanceof Error ? error.message : 'Failed to add cards',
-      });
     } finally {
       setIsLoading(false);
     }
   };
 
+  const addCard = () => {
+    setCards(prev => [...prev, { front: '', back: '', hint: '', code: '' }]);
+  };
+
+  const updateCard = (index: number, field: keyof Card, value: string) => {
+    setCards(prev => prev.map((card, i) => 
+      i === index ? { ...card, [field]: value } : card
+    ));
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-h-[90vh] overflow-hidden flex flex-col max-w-2xl">
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-hidden flex flex-col">
         <DialogHeader>
           <DialogTitle>Add Cards</DialogTitle>
           <DialogDescription>

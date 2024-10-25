@@ -6,11 +6,10 @@ import { authOptions } from '@/app/lib/auth';
 import { z } from 'zod';
 
 const updateCardSchema = z.object({
-  front: z.string().min(1),
-  back: z.string().min(1),
-  hint: z.string().optional(),
-  code: z.string().optional(),
-  order: z.number().optional(),
+  front: z.string().min(1).optional(),
+  back: z.string().min(1).optional(),
+  hint: z.string().nullable().optional(),
+  code: z.string().nullable().optional(),
 });
 
 export async function PATCH(
@@ -23,24 +22,37 @@ export async function PATCH(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const deck = await prisma.deck.findUnique({
-      where: { id: params.deckId },
-      select: { userId: true }
+    // First, verify the deck belongs to the user and the card exists
+    const card = await prisma.card.findUnique({
+      where: { id: params.cardId },
+      include: {
+        deck: {
+          select: { userId: true }
+        }
+      }
     });
 
-    if (!deck || deck.userId !== session.user.id) {
+    if (!card) {
+      return NextResponse.json({ error: 'Card not found' }, { status: 404 });
+    }
+
+    if (card.deck.userId !== session.user.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const json = await req.json();
-    const body = updateCardSchema.parse(json);
+    const updates = updateCardSchema.parse(json);
 
-    const card = await prisma.card.update({
+    // Update the card while preserving its order
+    const updatedCard = await prisma.card.update({
       where: { id: params.cardId },
-      data: body
+      data: {
+        ...updates,
+        order: card.order, // Explicitly preserve the order
+      }
     });
 
-    return NextResponse.json({ data: card });
+    return NextResponse.json({ data: updatedCard });
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: error.errors }, { status: 400 });

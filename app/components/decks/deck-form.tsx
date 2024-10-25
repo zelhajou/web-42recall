@@ -11,6 +11,7 @@ import { Switch } from '@/components/ui/switch';
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, Plus, X, Upload, Eye } from 'lucide-react';
+import { toast, useToast } from '@/components/ui/use-toast';
 
 const COMMON_42_PROJECTS = [
   'Libft',
@@ -87,48 +88,61 @@ export function FortyTwoDeckForm() {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
+// In FortyTwoDeckForm component
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsLoading(true);
 
-    try {
-      if (formData.cards.length === 0) {
-        throw new Error('Add at least one card to create a deck');
-      }
-
-      const response = await fetch('/api/decks', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          title: formData.title,
-          description: formData.description,
-          project: formData.project,
-          topic: formData.topic,
-          isPublic: formData.isPublic,
-          cards: formData.cards.map(card => ({
-            front: card.front,
-            back: card.back,
-            hint: card.hint || undefined,
-            code: card.code || undefined
-          }))
-        }),
-      });
-      
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Failed to create deck');
-      }
-
-      const { data } = await response.json();
-      router.push(`/dashboard/decks/${data.id}`);
-      router.refresh();
-    } catch (error) {
-      console.error('Error creating deck:', error);
-      // You might want to add a toast notification here
-    } finally {
-      setIsLoading(false);
+  try {
+    if (formData.cards.length === 0) {
+      throw new Error('Add at least one card to create a deck');
     }
-  };
+
+    const response = await fetch('/api/decks', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        title: formData.title.trim(),
+        description: formData.description.trim(),
+        project: formData.project || null,
+        topic: formData.topic || null,
+        isPublic: formData.isPublic,
+        cards: formData.cards.map(card => ({
+          front: card.front.trim(),
+          back: card.back.trim(),
+          hint: card.hint?.trim() || null,
+          code: card.code?.trim() || null
+        }))
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to create deck');
+    }
+
+    const { data } = await response.json();
+    
+    // Add toast for success
+    toast({
+      title: "Success",
+      description: "Deck created successfully!",
+    });
+
+    router.push(`/dashboard/decks/${data.id}`);
+    router.refresh();
+  } catch (error) {
+    console.error('Error creating deck:', error);
+    // Add toast for error
+    toast({
+      variant: "destructive",
+      title: "Error",
+      description: error instanceof Error ? error.message : 'Failed to create deck'
+    });
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   return (
     <div className="space-y-6">

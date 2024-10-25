@@ -5,6 +5,10 @@ import { prisma } from '@/app/lib/prisma';
 import { authOptions } from '@/app/lib/auth';
 import { z } from 'zod';
 
+const reorderSchema = z.object({
+  orderedIds: z.array(z.string())
+});
+
 const CardSchema = z.object({
   front: z.string().min(1),
   back: z.string().min(1),
@@ -20,8 +24,6 @@ const createDeckSchema = z.object({
   isPublic: z.boolean().default(false),
   cards: z.array(CardSchema)
 });
-
-
 
 export async function GET(req: Request) {
   try {
@@ -110,7 +112,7 @@ export async function GET(req: Request) {
 }
 
 
-export async function POST(req: Request) {
+export async function POST(req: Request) {  // Remove params parameter
   try {
     const session = await getServerSession(authOptions);
     if (!session?.user) {
@@ -120,16 +122,13 @@ export async function POST(req: Request) {
     const json = await req.json();
     const body = createDeckSchema.parse(json);
 
-    // Filter out empty strings for optional fields
-    const project = body.project?.trim() || null;
-    const topic = body.topic?.trim() || null;
-
+    // Create deck with cards in a transaction
     const deck = await prisma.deck.create({
       data: {
         title: body.title,
-        description: body.description,
-        project: project,
-        topic: topic,
+        description: body.description || null,
+        project: body.project || null,
+        topic: body.topic || null,
         isPublic: body.isPublic,
         userId: session.user.id,
         cards: {
@@ -143,23 +142,35 @@ export async function POST(req: Request) {
         }
       },
       include: {
-        cards: true,
+        cards: {
+          orderBy: {
+            order: 'asc'
+          }
+        },
+        tags: true,
         user: {
           select: {
             id: true,
             name: true,
           }
+        },
+        _count: {
+          select: { cards: true }
         }
       }
     });
 
     return NextResponse.json({ data: deck });
   } catch (error) {
-    console.error('Error creating deck:', error);
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: error.errors }, { status: 400 });
+      return NextResponse.json({ 
+        error: 'Validation error', 
+        details: error.errors 
+      }, { status: 400 });
     }
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    console.error('Error creating deck:', error);
+    return NextResponse.json({ 
+      error: 'Internal Server Error' 
+    }, { status: 500 });
   }
 }
-

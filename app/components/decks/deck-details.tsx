@@ -1,3 +1,4 @@
+// app/components/decks/deck-details.tsx
 'use client';
 
 import { useState } from "react";
@@ -31,9 +32,8 @@ import {
   EditDeckDialog,
   DeleteConfirmDialog,
   ShareDeckDialog,
-
+  EditCardDialog,
 } from "@/components/dialogs";
-import { useDeck } from "@/hooks/use-deck";
 import { Card as CardType, Deck } from "@/types/deck";
 
 interface DeckDetailsProps {
@@ -42,16 +42,9 @@ interface DeckDetailsProps {
 
 export function DeckDetails({ deck: initialDeck }: DeckDetailsProps) {
   const router = useRouter();
-  const {
-    deck,
-    isLoading,
-    updateDeck,
-    addCards,
-    updateCard,
-    deleteCard,
-    reorderCards,
-  } = useDeck(initialDeck);
   const { toast } = useToast();
+  const [deck, setDeck] = useState(initialDeck);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Dialog states
   const [isAddCardOpen, setIsAddCardOpen] = useState(false);
@@ -68,7 +61,31 @@ export function DeckDetails({ deck: initialDeck }: DeckDetailsProps) {
     card: null,
   });
 
+  // Refresh deck data
+  const refreshDeck = async () => {
+    try {
+      const response = await fetch(`/api/decks/${deck.id}`);
+      if (!response.ok) throw new Error('Failed to fetch deck');
+      const data = await response.json();
+      // Sort cards by order before updating state
+      const sortedCards = [...data.data.cards].sort((a, b) => a.order - b.order);
+      setDeck({
+        ...data.data,
+        cards: sortedCards,
+      });
+    } catch (error) {
+      console.error('Error refreshing deck:', error);
+      toast({
+        variant: 'destructive',
+        title: 'Error',
+        description: 'Failed to refresh deck data',
+      });
+    }
+  };
+
+  // Handle deck deletion
   const handleDeleteDeck = async () => {
+    setIsLoading(true);
     try {
       const response = await fetch(`/api/decks/${deck.id}`, {
         method: "DELETE",
@@ -77,8 +94,8 @@ export function DeckDetails({ deck: initialDeck }: DeckDetailsProps) {
       if (!response.ok) throw new Error("Failed to delete deck");
 
       toast({
-        title: "Deck deleted",
-        description: "The deck has been successfully deleted.",
+        title: "Success",
+        description: "Deck deleted successfully.",
       });
 
       router.push("/dashboard/decks");
@@ -90,14 +107,200 @@ export function DeckDetails({ deck: initialDeck }: DeckDetailsProps) {
         title: "Error",
         description: "Failed to delete deck. Please try again.",
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const handleEditCard = (card: CardType) => {
-    setSelectedCard(card);
-    setIsEditCardOpen(true);
+  // Handle deck update
+  const handleUpdateDeck = async (updates: Partial<Deck>) => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(`/api/decks/${deck.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updates),
+      });
+
+      if (!response.ok) throw new Error("Failed to update deck");
+
+      const data = await response.json();
+      setDeck(data.data);
+
+      toast({
+        title: "Success",
+        description: "Deck updated successfully.",
+      });
+    } catch (error) {
+      console.error("Error updating deck:", error);
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Failed to update deck. Please try again.",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
+  // In DeckDetails component
+const handleUpdateCard = async (cardId: string, updates: Partial<CardType>) => {
+  setIsLoading(true);
+  try {
+    // Optimistic update while preserving order
+    setDeck(prev => ({
+      ...prev,
+      cards: prev.cards.map(card => 
+        card.id === cardId 
+          ? { ...card, ...updates } 
+          : card
+      ),
+    }));
+
+    const response = await fetch(`/api/decks/${deck.id}/cards/${cardId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updates),
+    });
+
+    if (!response.ok) throw new Error("Failed to update card");
+
+    // No need to refresh the entire deck, our optimistic update is sufficient
+    toast({
+      title: "Success",
+      description: "Card updated successfully.",
+    });
+  } catch (error) {
+    console.error("Error updating card:", error);
+    // Only refresh if there's an error
+    await refreshDeck();
+    toast({
+      variant: "destructive",
+      title: "Error",
+      description: "Failed to update card. Please try again.",
+    });
+  } finally {
+    setIsLoading(false);
+  }
+};
+
+// Keep only this optimized version
+const handleAddCards = async (cards: Omit<CardType, 'id' | 'deckId' | 'createdAt' | 'updatedAt' | 'order'>[]) => {
+  setIsLoading(true);
+  try {
+    const response = await fetch(`/api/decks/${deck.id}/cards`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ cards }),
+    });
+
+    if (!response.ok) throw new Error("Failed to add cards");
+
+    const data = await response.json();
+    
+    // Optimistically update the deck with new cards
+    setDeck(prev => ({
+      ...prev,
+      cards: [...prev.cards, ...data.data],
+      _count: {
+        ...prev._count,
+        cards: prev._count.cards + data.data.length
+      }
+    }));
+
+    toast({
+      title: "Success",
+      description: `Added ${cards.length} cards successfully.`,
+    });
+
+    setIsAddCardOpen(false);
+  } catch (error) {
+    console.error("Error adding cards:", error);
+    // Refresh the deck data in case of error
+    await refreshDeck();
+    toast({
+      variant: "destructive",
+      title: "Error",
+      description: "Failed to add cards. Please try again.",
+    });
+  } finally {
+    setIsLoading(false);
+  }
+};
+
+  // Handle card reordering
+  const handleReorderCards = async (orderedIds: string[]) => {
+    try {
+      // Optimistic update
+      const reorderedCards = orderedIds
+        .map(id => deck.cards.find(card => card.id === id))
+        .filter((card): card is CardType => card !== undefined);
+
+      setDeck(prev => ({
+        ...prev,
+        cards: reorderedCards
+      }));
+
+      const response = await fetch(`/api/decks/${deck.id}/cards/reorder`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ orderedIds }),
+      });
+
+      if (!response.ok) throw new Error("Failed to reorder cards");
+
+      await refreshDeck();
+    } catch (error) {
+      console.error("Error reordering cards:", error);
+      await refreshDeck(); // Revert optimistic update
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Failed to reorder cards. Please try again.",
+      });
+    }
+  };
+
+
+  const deleteCard = async (cardId: string) => {
+    setIsLoading(true);
+    try {
+      // Optimistic update
+      setDeck(prev => ({
+        ...prev,
+        cards: prev.cards.filter(c => c.id !== cardId),
+        _count: {
+          ...prev._count,
+          cards: prev._count.cards - 1
+        }
+      }));
+
+      const response = await fetch(`/api/decks/${deck.id}/cards/${cardId}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) throw new Error("Failed to delete card");
+
+      toast({
+        title: "Success",
+        description: "Card deleted successfully.",
+      });
+    } catch (error) {
+      console.error("Error deleting card:", error);
+      // Revert optimistic update
+      await refreshDeck();
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Failed to delete card. Please try again.",
+      });
+    } finally {
+      setIsLoading(false);
+      setDeleteCardState({ isOpen: false, card: null });
+    }
+  };
+
+  // Export deck
   const exportDeck = () => {
     const deckData = {
       title: deck.title,
@@ -148,11 +351,11 @@ export function DeckDetails({ deck: initialDeck }: DeckDetailsProps) {
             </div>
             <div className="flex items-center gap-2">
               <User className="h-4 w-4" />
-              <span>{deck.user.name}</span>
+              <span>{deck.user.name || "Anonymous"}</span>
             </div>
           </div>
 
-          <div className="flex gap-2 pt-2">
+          <div className="flex flex-wrap gap-2 pt-2">
             {deck.project && <Badge variant="secondary">{deck.project}</Badge>}
             {deck.topic && <Badge variant="outline">{deck.topic}</Badge>}
             {deck.tags.map((tag) => (
@@ -166,6 +369,7 @@ export function DeckDetails({ deck: initialDeck }: DeckDetailsProps) {
         <div className="flex items-center gap-2">
           <Button
             onClick={() => router.push(`/dashboard/decks/${deck.id}/study`)}
+            disabled={deck.cards.length === 0}
           >
             <PlayCircle className="h-4 w-4 mr-2" />
             Study Now
@@ -234,10 +438,15 @@ export function DeckDetails({ deck: initialDeck }: DeckDetailsProps) {
         </CardContent>
       </Card>
 
-      {/* Cards */}
-      <div className="space-y-4">
+{/* Cards Section */}
+<div className="space-y-4">
         <div className="flex justify-between items-center">
-          <h2 className="text-xl font-semibold">Cards</h2>
+          <div className="space-y-1">
+            <h2 className="text-xl font-bold">Cards</h2>
+            <p className="text-sm text-muted-foreground">
+              {deck._count.cards} cards in this deck
+            </p>
+          </div>
           <Button onClick={() => setIsAddCardOpen(true)}>
             <Plus className="h-4 w-4 mr-2" />
             Add Cards
@@ -247,21 +456,29 @@ export function DeckDetails({ deck: initialDeck }: DeckDetailsProps) {
         <ReorderableCardList
           cards={deck.cards}
           deckId={deck.id}
-          onEdit={handleEditCard}
-          onDelete={(card) => setDeleteCardState({ isOpen: true, card })}
+          onEdit={card => {
+            setSelectedCard(card);
+            setIsEditCardOpen(true);
+          }}
+          onDelete={card => setDeleteCardState({ isOpen: true, card })}
+          onReorder={handleReorderCards}
+          isLoading={isLoading}
         />
       </div>
 
+      {/* Dialogs */}
       <AddCardDialog
         open={isAddCardOpen}
         onOpenChange={setIsAddCardOpen}
         deckId={deck.id}
+        onAddCards={handleAddCards}
       />
 
       <EditDeckDialog
         open={isEditDeckOpen}
         onOpenChange={setIsEditDeckOpen}
         deck={deck}
+        onUpdate={handleUpdateDeck}
       />
 
       <DeleteConfirmDialog
@@ -270,6 +487,7 @@ export function DeckDetails({ deck: initialDeck }: DeckDetailsProps) {
         onConfirm={handleDeleteDeck}
         title="Delete Deck"
         description="Are you sure you want to delete this deck? This action cannot be undone."
+        isLoading={isLoading}
       />
 
       <ShareDeckDialog
@@ -287,20 +505,22 @@ export function DeckDetails({ deck: initialDeck }: DeckDetailsProps) {
           }}
           card={selectedCard}
           deckId={deck.id}
+          onUpdate={handleUpdateCard}
         />
       )}
 
-      <DeleteConfirmDialog
-        open={deleteCardState.isOpen}
-        onOpenChange={(open) =>
-          !open && setDeleteCardState({ isOpen: false, card: null })
-        }
-        onConfirm={() =>
-          deleteCardState.card && handleDeleteCard(deleteCardState.card)
-        }
-        title="Delete Card"
-        description="Are you sure you want to delete this card? This action cannot be undone."
-      />
+  <DeleteConfirmDialog
+      open={deleteCardState.isOpen}
+      onOpenChange={(open) =>
+        !open && setDeleteCardState({ isOpen: false, card: null })
+      }
+      onConfirm={() =>
+        deleteCardState.card && deleteCard(deleteCardState.card.id)
+      }
+      title="Delete Card"
+      description="Are you sure you want to delete this card? This action cannot be undone."
+      isLoading={isLoading}
+    />
     </div>
   );
 }

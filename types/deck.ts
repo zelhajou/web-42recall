@@ -12,15 +12,16 @@ export interface DeckFilters {
     pages: number;
   }
 
-export interface Tag {
-  id: string;
-  name: string;
-}
 
 export interface User {
   id: string;
   name: string | null;
   image: string | null;
+}
+
+export interface Tag {
+  id: string;
+  name: string;
 }
 
 export interface Card {

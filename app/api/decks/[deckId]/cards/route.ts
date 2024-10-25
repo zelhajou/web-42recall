@@ -26,6 +26,9 @@ export async function POST(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const json = await req.json();
+    const body = createCardsSchema.parse(json);
+
     const deck = await prisma.deck.findUnique({
       where: { id: params.deckId },
       select: { userId: true, _count: { select: { cards: true } } }
@@ -38,9 +41,6 @@ export async function POST(
     if (deck.userId !== session.user.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-
-    const json = await req.json();
-    const body = createCardsSchema.parse(json);
 
     const lastOrder = deck._count.cards;
 

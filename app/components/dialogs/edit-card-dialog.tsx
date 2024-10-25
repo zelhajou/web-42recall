@@ -1,8 +1,7 @@
 // app/components/dialogs/edit-card-dialog.tsx
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';  // Add useEffect here
 import {
   Dialog,
   DialogContent,
@@ -15,13 +14,14 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Loader2 } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
-import { Card } from '@/types/deck';
+import { Card as CardType } from '@/types/deck';
 
 interface EditCardDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  card: Card;
+  card: CardType;
   deckId: string;
+  onUpdate: (cardId: string, updates: Partial<CardType>) => Promise<void>;
 }
 
 export function EditCardDialog({
@@ -29,10 +29,11 @@ export function EditCardDialog({
   onOpenChange,
   card,
   deckId,
+  onUpdate
 }: EditCardDialogProps) {
-  const router = useRouter();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
+  // Initialize formData with the card's current values
   const [formData, setFormData] = useState({
     front: card.front,
     back: card.back,
@@ -40,39 +41,40 @@ export function EditCardDialog({
     code: card.code || '',
   });
 
+  // Reset form when card changes
+  useEffect(() => {
+    setFormData({
+      front: card.front,
+      back: card.back,
+      hint: card.hint || '',
+      code: card.code || '',
+    });
+  }, [card]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
-      const response = await fetch(`/api/decks/${deckId}/cards/${card.id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          front: formData.front.trim(),
-          back: formData.back.trim(),
-          hint: formData.hint.trim() || null,
-          code: formData.code.trim() || null,
-        }),
+      await onUpdate(card.id, {
+        front: formData.front.trim(),
+        back: formData.back.trim(),
+        hint: formData.hint.trim() || null,
+        code: formData.code.trim() || null,
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to update card');
-      }
-
       toast({
-        title: 'Card updated',
-        description: 'The card has been successfully updated.',
+        title: 'Success',
+        description: 'Card updated successfully.',
       });
 
       onOpenChange(false);
-      router.refresh();
     } catch (error) {
       console.error('Error updating card:', error);
       toast({
         variant: 'destructive',
         title: 'Error',
-        description: error instanceof Error ? error.message : 'Failed to update card',
+        description: 'Failed to update card. Please try again.',
       });
     } finally {
       setIsLoading(false);
@@ -81,53 +83,82 @@ export function EditCardDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
+      <DialogContent className="sm:max-w-[600px]">
         <DialogHeader>
           <DialogTitle>Edit Card</DialogTitle>
           <DialogDescription>
-            Update the card's content.
+            Make changes to your flashcard.
           </DialogDescription>
         </DialogHeader>
-
+        
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-4">
-            <Input
-              placeholder="Question"
-              value={formData.front}
-              onChange={e => setFormData(prev => ({ ...prev, front: e.target.value }))}
-              required
-            />
-            <Textarea
-              placeholder="Answer"
-              value={formData.back}
-              onChange={e => setFormData(prev => ({ ...prev, back: e.target.value }))}
-              required
-            />
-            <Input
-              placeholder="Hint (optional)"
-              value={formData.hint}
-              onChange={e => setFormData(prev => ({ ...prev, hint: e.target.value }))}
-            />
-            <Textarea
-              placeholder="Code Example (optional)"
-              value={formData.code}
-              onChange={e => setFormData(prev => ({ ...prev, code: e.target.value }))}
-              className="font-mono"
-            />
+            <div className="space-y-2">
+              <label htmlFor="front" className="text-sm font-medium">
+                Question
+              </label>
+              <Input
+                id="front"
+                value={formData.front}
+                onChange={e => setFormData(prev => ({ ...prev, front: e.target.value }))}
+                required
+                placeholder="Enter the question or front of the card"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="back" className="text-sm font-medium">
+                Answer
+              </label>
+              <Textarea
+                id="back"
+                value={formData.back}
+                onChange={e => setFormData(prev => ({ ...prev, back: e.target.value }))}
+                required
+                placeholder="Enter the answer or back of the card"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="hint" className="text-sm font-medium">
+                Hint (Optional)
+              </label>
+              <Input
+                id="hint"
+                value={formData.hint}
+                onChange={e => setFormData(prev => ({ ...prev, hint: e.target.value }))}
+                placeholder="Add a helpful hint"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="code" className="text-sm font-medium">
+                Code Example (Optional)
+              </label>
+              <Textarea
+                id="code"
+                value={formData.code}
+                onChange={e => setFormData(prev => ({ ...prev, code: e.target.value }))}
+                placeholder="Add a code example"
+                className="font-mono"
+                rows={4}
+              />
+            </div>
           </div>
 
-          <div className="flex justify-end gap-2">
+          <div className="flex justify-end gap-2 pt-4">
             <Button
               type="button"
               variant="outline"
               onClick={() => onOpenChange(false)}
+              disabled={isLoading}
             >
               Cancel
             </Button>
             <Button type="submit" disabled={isLoading}>
               {isLoading ? (
                 <>
-                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   Saving...
                 </>
               ) : (

@@ -1,3 +1,4 @@
+// app/hooks/use-deck.ts
 import { useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';
@@ -28,8 +29,12 @@ export function useDeck(initialDeck: Deck) {
   const updateDeck = useCallback(async (updates: Partial<Deck>) => {
     setIsLoading(true);
     try {
-      // Optimistically update the UI
-      setDeck(prev => ({ ...prev, ...updates }));
+      // Optimistic update with _count preservation
+      setDeck(prev => ({
+        ...prev,
+        ...updates,
+        _count: prev._count // Preserve the count
+      }));
 
       const response = await fetch(`/api/decks/${deck.id}`, {
         method: 'PATCH',
@@ -39,13 +44,21 @@ export function useDeck(initialDeck: Deck) {
 
       if (!response.ok) throw new Error('Failed to update deck');
 
-      toast({
-        title: 'Deck updated',
-        description: 'Changes saved successfully.',
-      });
+      const data = await response.json();
+      
+      // Update with server data, preserving _count if not provided
+      setDeck(prev => ({
+        ...prev,
+        ...data.data,
+        _count: data.data._count || prev._count
+      }));
 
-      router.refresh();
+      toast({
+        title: 'Success',
+        description: 'Deck updated successfully.',
+      });
     } catch (error) {
+      // Revert optimistic update
       refreshDeck();
       toast({
         variant: 'destructive',
@@ -55,38 +68,12 @@ export function useDeck(initialDeck: Deck) {
     } finally {
       setIsLoading(false);
     }
-  }, [deck.id, refreshDeck, router, toast]);
-
-  const addCards = useCallback(async (cards: Omit<Card, 'id' | 'deckId' | 'createdAt' | 'updatedAt' | 'order'>[]) => {
-    setIsLoading(true);
-    try {
-      const response = await fetch(`/api/decks/${deck.id}/cards`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ cards }),
-      });
-
-      if (!response.ok) throw new Error('Failed to add cards');
-
-      await refreshDeck();
-      toast({
-        title: 'Cards added',
-        description: `Successfully added ${cards.length} cards to the deck.`,
-      });
-    } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Error',
-        description: 'Failed to add cards',
-      });
-    } finally {
-      setIsLoading(false);
-    }
   }, [deck.id, refreshDeck, toast]);
 
   const updateCard = useCallback(async (cardId: string, updates: Partial<Card>) => {
     setIsLoading(true);
     try {
+      // Optimistic update
       setDeck(prev => ({
         ...prev,
         cards: prev.cards.map(card => 
@@ -102,13 +89,22 @@ export function useDeck(initialDeck: Deck) {
 
       if (!response.ok) throw new Error('Failed to update card');
 
-      toast({
-        title: 'Card updated',
-        description: 'Changes saved successfully.',
-      });
+      const data = await response.json();
+      
+      // Update the specific card with server data
+      setDeck(prev => ({
+        ...prev,
+        cards: prev.cards.map(card => 
+          card.id === cardId ? data.data : card
+        ),
+      }));
 
-      router.refresh();
+      toast({
+        title: 'Success',
+        description: 'Card updated successfully.',
+      });
     } catch (error) {
+      // Revert optimistic update
       refreshDeck();
       toast({
         variant: 'destructive',
@@ -118,48 +114,55 @@ export function useDeck(initialDeck: Deck) {
     } finally {
       setIsLoading(false);
     }
-  }, [deck.id, refreshDeck, router, toast]);
+  }, [deck.id, refreshDeck, toast]);
 
-  const deleteCard = useCallback(async (cardId: string) => {
+  const addCards = useCallback(async (newCards: Omit<Card, 'id' | 'deckId' | 'createdAt' | 'updatedAt' | 'order'>[]) => {
     setIsLoading(true);
     try {
+      const response = await fetch(`/api/decks/${deck.id}/cards`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ cards: newCards }),
+      });
+
+      if (!response.ok) throw new Error('Failed to add cards');
+
+      const data = await response.json();
+      
+      // Update deck with new cards
       setDeck(prev => ({
         ...prev,
-        cards: prev.cards.filter(card => card.id !== cardId),
-        _count: { ...prev._count, cards: prev._count.cards - 1 },
+        cards: [...prev.cards, ...data.data],
+        _count: {
+          ...prev._count,
+          cards: prev._count.cards + data.data.length,
+        },
       }));
 
-      const response = await fetch(`/api/decks/${deck.id}/cards/${cardId}`, {
-        method: 'DELETE',
-      });
-
-      if (!response.ok) throw new Error('Failed to delete card');
-
       toast({
-        title: 'Card deleted',
-        description: 'The card has been successfully deleted.',
+        title: 'Success',
+        description: `Added ${newCards.length} cards successfully.`,
       });
-
-      router.refresh();
     } catch (error) {
-      refreshDeck();
       toast({
         variant: 'destructive',
         title: 'Error',
-        description: 'Failed to delete card',
+        description: 'Failed to add cards',
       });
     } finally {
       setIsLoading(false);
     }
-  }, [deck.id, refreshDeck, router, toast]);
+  }, [deck.id, toast]);
 
   const reorderCards = useCallback(async (orderedIds: string[]) => {
+    setIsLoading(true);
     try {
+      // Optimistic update
       setDeck(prev => ({
         ...prev,
         cards: orderedIds
           .map(id => prev.cards.find(card => card.id === id))
-          .filter((card): card is Card => card !== undefined),
+          .filter((card): card is typeof prev.cards[0] => card !== undefined)
       }));
 
       const response = await fetch(`/api/decks/${deck.id}/cards/reorder`, {
@@ -170,28 +173,35 @@ export function useDeck(initialDeck: Deck) {
 
       if (!response.ok) throw new Error('Failed to reorder cards');
 
+      const data = await response.json();
+      setDeck(prev => ({
+        ...prev,
+        cards: data.data
+      }));
+
       toast({
-        title: 'Cards reordered',
-        description: 'New order saved successfully.',
+        title: 'Success',
+        description: 'Cards reordered successfully.',
       });
     } catch (error) {
+      // Revert optimistic update
       refreshDeck();
       toast({
         variant: 'destructive',
         title: 'Error',
         description: 'Failed to reorder cards',
       });
+    } finally {
+      setIsLoading(false);
     }
   }, [deck.id, refreshDeck, toast]);
 
   return {
     deck,
     isLoading,
-    refreshDeck,
     updateDeck,
-    addCards,
     updateCard,
-    deleteCard,
+    addCards,
     reorderCards,
   };
 }
