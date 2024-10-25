@@ -6,7 +6,7 @@ import { useSession, signOut } from 'next-auth/react'
 import { Menu, Transition } from '@headlessui/react'
 import { 
   HomeIcon, 
-  PlusCircleIcon, 
+  RectangleStackIcon,
   BookOpenIcon, 
   Cog6ToothIcon, 
   BellIcon,
@@ -22,9 +22,11 @@ interface DashboardLayoutProps {
   children: React.ReactNode
 }
 
+
+
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
-  { name: 'Create Deck', href: '/dashboard/create', icon: PlusCircleIcon },
+  { name: 'Decks', href: '/dashboard/decks', icon: RectangleStackIcon },
   { name: 'Study', href: '/dashboard/study', icon: BookOpenIcon },
   { name: 'Settings', href: '/dashboard/settings', icon: Cog6ToothIcon },
 ]
