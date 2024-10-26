@@ -412,18 +412,7 @@ export function FortyTwoDeckForm() {
           <div className="space-y-2">
             <div className="flex justify-between items-center">
               <h3 className="font-medium">Cards ({formData.cards.length})</h3>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setShowPreview(!showPreview)}
-              >
-                {showPreview ? (
-                  <EyeOff className="w-4 h-4 mr-2" />
-                ) : (
-                  <Eye className="w-4 h-4 mr-2" />
-                )}
-                {showPreview ? 'Hide Preview' : 'Show Preview'}
-              </Button>
+         
             </div>
             <div className="space-y-2">
               {formData.cards.map((card, index) => (
