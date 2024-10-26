@@ -110,34 +110,12 @@ You can also run the project with Docker using the provided `docker-compose.yml`
 
 ### Running with Docker
 
-1. Clone the repository:
-```bash
-git clone https://github.com/zelhajou/42recall.git
-cd 42recall
-```
-
-2. Create a `.env` file with required environment variables:
-```env
-# Database
-POSTGRES_USER=your_postgres_user
-POSTGRES_PASSWORD=your_postgres_password
-POSTGRES_DB=your_database_name
-POSTGRES_PRISMA_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
-POSTGRES_URL_NON_POOLING=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
-
-# Authentication
-FORTYTWO_CLIENT_ID=your_42_client_id
-FORTYTWO_CLIENT_SECRET=your_42_client_secret
-NEXTAUTH_URL=http://localhost:3000
-NEXTAUTH_SECRET=your_nextauth_secret
-```
-
-3. Build and run the containers:
+1. Build and run the containers:
 ```bash
 docker-compose up -d --build
 ```
 
-4. Run database migrations:
+2. Run database migrations:
 ```bash
 docker-compose exec app npx prisma migrate deploy
 ```
