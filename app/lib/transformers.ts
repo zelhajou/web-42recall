@@ -1,6 +1,4 @@
-// app/lib/transformers.ts
 import { Deck, Card, User, Tag } from '@/types/deck';
-
 export function transformPrismaDeckToApp(prismaDeck: any): Deck {
   return {
     id: prismaDeck.id,

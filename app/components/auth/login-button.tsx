@@ -1,16 +1,13 @@
 'use client'
-
 import { signIn } from 'next-auth/react'
 import { Button } from '@/components/ui/button'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Loader2 } from 'lucide-react'
 import Image from 'next/image'
-
 export function LoginButton() {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
-
   const handleLogin = async () => {
     try {
       setIsLoading(true)
@@ -18,7 +15,6 @@ export function LoginButton() {
         callbackUrl: '/dashboard',
         redirect: false,
       })
-
       if (result?.ok) {
         setTimeout(() => {
           router.push('/dashboard')
@@ -28,7 +24,6 @@ export function LoginButton() {
       console.error('Login error:', error)
     }
   }
-
   return (
     <Button 
       className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg shadow-lg transition-all duration-300" 

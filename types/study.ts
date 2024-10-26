@@ -1,4 +1,3 @@
-// types/study.ts
 export interface StudySession {
     id: string;
     deckId: string;
@@ -11,13 +10,11 @@ export interface StudySession {
       topic: string | null;
     };
   }
-  
   export interface CardProgress {
     id: string;
     lastReviewed: string;
     nextReview: string;
   }
-  
   export interface DeckWithProgress {
     id: string;
     title: string;
@@ -31,7 +28,6 @@ export interface StudySession {
       progress: CardProgress[];
     }>;
   }
-  
   export interface StudyStats {
     _count: {
       _all: number;
@@ -40,7 +36,6 @@ export interface StudySession {
       cardsStudied: number;
     };
   }
-  
   export interface StudyDashboardData {
     decks: DeckWithProgress[];
     recentSessions: StudySession[];

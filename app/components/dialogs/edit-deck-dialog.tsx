@@ -1,6 +1,4 @@
-// app/components/dialogs/edit-deck-dialog.tsx
 'use client';
-
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import {
@@ -23,8 +21,7 @@ import {
 } from '@/components/ui/select';
 import { Loader2 } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
-import type { Deck } from '@/types/deck';  // Add this import
-
+import type { Deck } from '@/types/deck';  
 const COMMON_42_PROJECTS = [
   'Libft',
   'ft_printf',
@@ -42,7 +39,6 @@ const COMMON_42_PROJECTS = [
   'ft_irc',
   'ft_transcendence'
 ] as const;
-
 const TOPICS = [
   'C Functions',
   'System Calls',
@@ -57,14 +53,12 @@ const TOPICS = [
   'Project Tips',
   'Common Errors'
 ] as const;
-
 interface EditDeckDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   deck: Deck;
   onUpdate: (updates: Partial<Deck>) => Promise<void>;
 }
-
 export function EditDeckDialog({ 
   open, 
   onOpenChange, 
@@ -80,11 +74,9 @@ export function EditDeckDialog({
     topic: deck.topic || 'none',
     isPublic: deck.isPublic,
   });
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-
     try {
       await onUpdate({
         title: formData.title.trim(),
@@ -93,12 +85,10 @@ export function EditDeckDialog({
         topic: formData.topic === 'none' ? null : formData.topic,
         isPublic: formData.isPublic,
       });
-
       toast({
         title: 'Success',
         description: 'Deck updated successfully.',
       });
-
       onOpenChange(false);
     } catch (error) {
       console.error('Error updating deck:', error);
@@ -111,7 +101,6 @@ export function EditDeckDialog({
       setIsLoading(false);
     }
   };
-
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
@@ -121,7 +110,6 @@ export function EditDeckDialog({
             Update your deck's information.
           </DialogDescription>
         </DialogHeader>
-
         <form onSubmit={handleSubmit} className="space-y-4">
           <Input
             placeholder="Deck Title"
@@ -129,7 +117,6 @@ export function EditDeckDialog({
             onChange={e => setFormData(prev => ({ ...prev, title: e.target.value }))}
             required
           />
-          
           <Select
             value={formData.project}
             onValueChange={(value) => setFormData(prev => ({ ...prev, project: value }))}
@@ -146,7 +133,6 @@ export function EditDeckDialog({
               ))}
             </SelectContent>
           </Select>
-
           <Select
             value={formData.topic}
             onValueChange={(value) => setFormData(prev => ({ ...prev, topic: value }))}
@@ -163,13 +149,11 @@ export function EditDeckDialog({
               ))}
             </SelectContent>
           </Select>
-          
           <Textarea
             placeholder="Deck Description"
             value={formData.description}
             onChange={e => setFormData(prev => ({ ...prev, description: e.target.value }))}
           />
-
           <div className="flex items-center space-x-2">
             <Switch
               checked={formData.isPublic}
@@ -177,7 +161,6 @@ export function EditDeckDialog({
             />
             <label>Make deck public</label>
           </div>
-
           <div className="flex justify-end gap-2">
             <Button
               type="button"
@@ -203,5 +186,4 @@ export function EditDeckDialog({
     </Dialog>
   );
 }
-
 export default EditDeckDialog;

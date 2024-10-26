@@ -1,6 +1,4 @@
-// types/deck.ts
 import { z } from 'zod';
-
 export const searchParamsSchema = z.object({
   page: z.coerce.number().optional().default(1),
   limit: z.coerce.number().optional().default(12),
@@ -9,35 +7,26 @@ export const searchParamsSchema = z.object({
   topic: z.string().optional(),
   sort: z.enum(['updated', 'created', 'alpha', 'cards']).optional().default('updated'),
 });
-
 export type SearchParams = z.infer<typeof searchParamsSchema>;
-
 export interface DeckFilters {
     search: string;
     project: string | null;
     topic: string | null;
     sortBy: 'updated' | 'created' | 'alpha' | 'cards';
   }
-  
   export interface PaginationState {
     page: number;
     limit: number;
     total: number;
     pages: number;
   }
-
-
-  // types/deck.ts
-// types/deck.ts
 export interface DeckFilters {
   search: string;
   project: string | null;
   topic: string | null;
   sortBy: 'updated' | 'created' | 'alpha' | 'cards';
 }
-
 export type DeckSortOption = DeckFilters['sortBy'];
-
 export interface Card {
   id: string;
   front: string;
@@ -49,19 +38,15 @@ export interface Card {
   createdAt: string;
   updatedAt: string;
 }
-
 export interface Tag {
   id: string;
   name: string;
 }
-
 export interface User {
   id: string;
   name: string | null;
   image: string | null;
 }
-
-// types/deck.ts
 export interface Deck {
   id: string;
   title: string;

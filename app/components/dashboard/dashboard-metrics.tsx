@@ -1,21 +1,16 @@
-// app/components/dashboard/dashboard-metrics.tsx
 'use client';
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { Code2, GitBranch, Circle, Target, Book } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-
 export function DashboardMetrics() {
-  // Sample data - in production, this would come from your API
   const studyProgress = [
     { date: '2024-01', xp: 4200 },
     { date: '2024-02', xp: 7840 },
     { date: '2024-03', xp: 9650 },
     { date: '2024-04', xp: 12480 },
   ];
-
   const commonCircles = [
     "42cursus",
     "Inner Circle",
@@ -25,10 +20,9 @@ export function DashboardMetrics() {
     "Algorithms",
     "Web"
   ];
-
   return (
     <div className="space-y-6">
-      {/* Current Progress Stats */}
+      {}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
@@ -40,7 +34,6 @@ export function DashboardMetrics() {
             <p className="text-xs text-muted-foreground">42% to next level</p>
           </CardContent>
         </Card>
-
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Current Project</CardTitle>
@@ -51,7 +44,6 @@ export function DashboardMetrics() {
             <p className="text-xs text-muted-foreground">In progress</p>
           </CardContent>
         </Card>
-
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Study Streak</CardTitle>
@@ -62,7 +54,6 @@ export function DashboardMetrics() {
             <p className="text-xs text-muted-foreground">Keep pushing!</p>
           </CardContent>
         </Card>
-
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Blackhole</CardTitle>
@@ -74,8 +65,7 @@ export function DashboardMetrics() {
           </CardContent>
         </Card>
       </div>
-
-      {/* Study Progress Chart */}
+      {}
       <Card>
         <CardHeader>
           <CardTitle>XP Progress</CardTitle>
@@ -105,8 +95,7 @@ export function DashboardMetrics() {
           </div>
         </CardContent>
       </Card>
-
-      {/* Study Circles */}
+      {}
       <div className="grid gap-4 md:grid-cols-2">
         <Card>
           <CardHeader>
@@ -128,8 +117,7 @@ export function DashboardMetrics() {
             </div>
           </CardContent>
         </Card>
-
-        {/* Recent Activity */}
+        {}
         <Card>
           <CardHeader>
             <CardTitle>Recent Activity</CardTitle>

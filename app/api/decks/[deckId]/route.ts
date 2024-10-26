@@ -1,10 +1,8 @@
-// app/api/decks/[deckId]/route.ts
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import { prisma } from "@/app/lib/prisma";
 import { authOptions } from "@/app/lib/auth";
 import { z } from "zod";
-
 const updateDeckSchema = z.object({
   title: z.string().min(1).max(100),
   description: z.string().optional(),
@@ -12,7 +10,6 @@ const updateDeckSchema = z.object({
   topic: z.string().optional(),
   isPublic: z.boolean(),
 });
-
 export async function PATCH(
   req: Request,
   { params }: { params: { deckId: string } }
@@ -22,10 +19,8 @@ export async function PATCH(
     if (!session?.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-
     const json = await req.json();
     const body = updateDeckSchema.parse(json);
-
     const deck = await prisma.deck.update({
       where: { id: params.deckId },
       data: body,
@@ -44,7 +39,6 @@ export async function PATCH(
         }
       }
     });
-
     return NextResponse.json({ data: deck });
   } catch (error) {
     if (error instanceof z.ZodError) {
@@ -57,7 +51,6 @@ export async function PATCH(
     );
   }
 }
-
 export async function DELETE(
   req: Request,
   { params }: { params: { deckId: string } }
@@ -67,24 +60,19 @@ export async function DELETE(
     if (!session?.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-
     const deck = await prisma.deck.findUnique({
       where: { id: params.deckId },
       select: { userId: true },
     });
-
     if (!deck) {
       return NextResponse.json({ error: "Deck not found" }, { status: 404 });
     }
-
     if (deck.userId !== session.user.id) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-
     await prisma.deck.delete({
       where: { id: params.deckId },
     });
-
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error deleting deck:", error);
@@ -103,7 +91,6 @@ export async function GET(
     if (!session?.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-
     const deck = await prisma.deck.findUnique({
       where: { id: params.deckId },
       include: {
@@ -125,15 +112,12 @@ export async function GET(
         },
       },
     });
-
     if (!deck) {
       return NextResponse.json({ error: "Deck not found" }, { status: 404 });
     }
-
     if (deck.userId !== session.user.id && !deck.isPublic) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-
     return NextResponse.json({ data: deck });
   } catch (error) {
     console.error("Error fetching deck:", error);

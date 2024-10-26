@@ -1,4 +1,3 @@
-// app/components/dialogs/delete-confirm-dialog.tsx
 import {
   AlertDialog,
   AlertDialogAction,
@@ -10,7 +9,6 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { Trash2 } from 'lucide-react';
-
 interface DeleteConfirmDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -19,7 +17,6 @@ interface DeleteConfirmDialogProps {
   description: string;
   isLoading?: boolean;
 }
-
 export function DeleteConfirmDialog({
   open,
   onOpenChange,

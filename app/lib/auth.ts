@@ -1,8 +1,6 @@
-// app/lib/auth.ts
 import type { NextAuthOptions } from "next-auth"
 import FortyTwoProvider from "next-auth/providers/42-school"
 import { CustomPrismaAdapter } from "./custom-prisma-adapter"
-
 export const authOptions: NextAuthOptions = {
   adapter: CustomPrismaAdapter(),
   providers: [
@@ -33,15 +31,12 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async redirect({ url, baseUrl }) {
-      // Handle relative URLs
       if (url.startsWith('/')) {
         return `${baseUrl}${url}`
       }
-      // Handle absolute URLs on the same origin
       if (new URL(url).origin === baseUrl) {
         return url
       }
-      // Default fallback
       return baseUrl
     },
   },
@@ -51,7 +46,7 @@ export const authOptions: NextAuthOptions = {
   },
   session: {
     strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60, // 30 days
+    maxAge: 30 * 24 * 60 * 60, 
   },
   debug: process.env.NODE_ENV === 'development',
 }

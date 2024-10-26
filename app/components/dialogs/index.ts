@@ -1,4 +1,3 @@
-// app/components/dialogs/index.ts
 export * from './add-card-dialog';
 export * from './edit-card-dialog';
 export * from './edit-deck-dialog';

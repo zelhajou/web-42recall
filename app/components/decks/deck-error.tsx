@@ -1,12 +1,9 @@
-// app/components/decks/deck-error.tsx
 import { AlertCircle } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
-
 interface DeckErrorProps {
   onRetry: () => void;
 }
-
 export function DeckError({ onRetry }: DeckErrorProps) {
   return (
     <Alert variant="destructive">

@@ -1,7 +1,5 @@
-// app/components/dialogs/edit-card-dialog.tsx
 'use client';
-
-import { useState, useEffect } from 'react';  // Add useEffect here
+import { useState, useEffect } from 'react';  
 import {
   Dialog,
   DialogContent,
@@ -15,7 +13,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { Loader2 } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { Card as CardType } from '@/types/deck';
-
 interface EditCardDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -23,7 +20,6 @@ interface EditCardDialogProps {
   deckId: string;
   onUpdate: (cardId: string, updates: Partial<CardType>) => Promise<void>;
 }
-
 export function EditCardDialog({
   open,
   onOpenChange,
@@ -33,15 +29,12 @@ export function EditCardDialog({
 }: EditCardDialogProps) {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
-  // Initialize formData with the card's current values
   const [formData, setFormData] = useState({
     front: card.front,
     back: card.back,
     hint: card.hint || '',
     code: card.code || '',
   });
-
-  // Reset form when card changes
   useEffect(() => {
     setFormData({
       front: card.front,
@@ -50,11 +43,9 @@ export function EditCardDialog({
       code: card.code || '',
     });
   }, [card]);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-
     try {
       await onUpdate(card.id, {
         front: formData.front.trim(),
@@ -62,12 +53,10 @@ export function EditCardDialog({
         hint: formData.hint.trim() || null,
         code: formData.code.trim() || null,
       });
-
       toast({
         title: 'Success',
         description: 'Card updated successfully.',
       });
-
       onOpenChange(false);
     } catch (error) {
       console.error('Error updating card:', error);
@@ -80,7 +69,6 @@ export function EditCardDialog({
       setIsLoading(false);
     }
   };
-
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[600px]">
@@ -90,7 +78,6 @@ export function EditCardDialog({
             Make changes to your flashcard.
           </DialogDescription>
         </DialogHeader>
-        
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-4">
             <div className="space-y-2">
@@ -105,7 +92,6 @@ export function EditCardDialog({
                 placeholder="Enter the question or front of the card"
               />
             </div>
-
             <div className="space-y-2">
               <label htmlFor="back" className="text-sm font-medium">
                 Answer
@@ -118,7 +104,6 @@ export function EditCardDialog({
                 placeholder="Enter the answer or back of the card"
               />
             </div>
-
             <div className="space-y-2">
               <label htmlFor="hint" className="text-sm font-medium">
                 Hint (Optional)
@@ -130,7 +115,6 @@ export function EditCardDialog({
                 placeholder="Add a helpful hint"
               />
             </div>
-
             <div className="space-y-2">
               <label htmlFor="code" className="text-sm font-medium">
                 Code Example (Optional)
@@ -145,7 +129,6 @@ export function EditCardDialog({
               />
             </div>
           </div>
-
           <div className="flex justify-end gap-2 pt-4">
             <Button
               type="button"

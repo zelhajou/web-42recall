@@ -1,6 +1,4 @@
-// app/components/dashboard/dashboard-overview.tsx
 'use client';
-
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -11,25 +9,19 @@ import {
   Clock,
   ArrowRight,
 } from 'lucide-react';
-
 interface DashboardOverviewProps {
-  data: any; // Replace with proper type
+  data: any; 
 }
-
 export function DashboardOverview({ data }: DashboardOverviewProps) {
-  // Calculate total cards across all decks
   const totalCards = data.decks.reduce((sum: number, deck: any) => 
     sum + deck._count.cards, 0
   );
-
-  // Calculate total study sessions
   const totalStudySessions = data.decks.reduce((sum: number, deck: any) => 
     sum + deck._count.studySessions, 0
   );
-
   return (
     <div className="space-y-8">
-      {/* Header */}
+      {}
       <div className="flex justify-between items-start">
         <div>
           <h1 className="text-3xl font-bold">Welcome back, {data.name || 'Student'}!</h1>
@@ -44,8 +36,7 @@ export function DashboardOverview({ data }: DashboardOverviewProps) {
           </Link>
         </Button>
       </div>
-
-      {/* Stats Overview */}
+      {}
       <div className="grid gap-4 md:grid-cols-3">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
@@ -59,7 +50,6 @@ export function DashboardOverview({ data }: DashboardOverviewProps) {
             </p>
           </CardContent>
         </Card>
-
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Study Sessions</CardTitle>
@@ -72,7 +62,6 @@ export function DashboardOverview({ data }: DashboardOverviewProps) {
             </p>
           </CardContent>
         </Card>
-
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Last Study</CardTitle>
@@ -90,8 +79,7 @@ export function DashboardOverview({ data }: DashboardOverviewProps) {
           </CardContent>
         </Card>
       </div>
-
-      {/* Recent Decks */}
+      {}
       <div className="space-y-4">
         <div className="flex justify-between items-center">
           <h2 className="text-xl font-semibold">Recent Decks</h2>
@@ -102,7 +90,6 @@ export function DashboardOverview({ data }: DashboardOverviewProps) {
             </Link>
           </Button>
         </div>
-
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {data.decks.map((deck: any) => (
             <Link 
@@ -136,7 +123,6 @@ export function DashboardOverview({ data }: DashboardOverviewProps) {
               </Card>
             </Link>
           ))}
-
           {data.decks.length === 0 && (
             <Card className="col-span-full">
               <CardContent className="p-6 text-center">

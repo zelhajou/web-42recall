@@ -1,7 +1,4 @@
-// types/index.ts
 import { Prisma } from '@prisma/client'
-
-// Extend next-auth types
 declare module "next-auth" {
   interface Session {
     user: {
@@ -12,8 +9,6 @@ declare module "next-auth" {
     }
   }
 }
-
-// Custom types for the application
 export type DeckWithCards = Prisma.DeckGetPayload<{
   include: {
     cards: true;
@@ -27,20 +22,16 @@ export type DeckWithCards = Prisma.DeckGetPayload<{
     }
   }
 }>
-
 export type CardWithProgress = Prisma.CardGetPayload<{
   include: {
     progress: true;
   }
 }>
-
 export interface StudySessionData {
   deckId: string;
   startTime: Date;
   cardsStudied: number;
 }
-
-// API response types
 export interface ApiResponse<T> {
   success: boolean;
   data?: T;

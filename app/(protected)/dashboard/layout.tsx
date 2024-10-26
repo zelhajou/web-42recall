@@ -1,6 +1,4 @@
-// app/(protected)/dashboard/layout.tsx
 import { DeckProvider } from '@/contexts/deck-context';
-
 export default function DashboardLayout({
   children,
 }: {
@@ -8,7 +6,7 @@ export default function DashboardLayout({
 }) {
   return (
     <DeckProvider>
-      {/* Your existing layout content */}
+      {}
       {children}
     </DeckProvider>
   );

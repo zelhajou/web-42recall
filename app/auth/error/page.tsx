@@ -1,14 +1,10 @@
-// app/auth/error/page.tsx
 'use client'
-
 import { useSearchParams } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-
 export default function AuthErrorPage() {
   const searchParams = useSearchParams()
   const error = searchParams?.get('error')
-
   const getErrorMessage = (error: string | null) => {
     switch (error) {
       case 'OAuthAccountNotLinked':
@@ -21,7 +17,6 @@ export default function AuthErrorPage() {
         return 'An error occurred during authentication. Please try again.'
     }
   }
-
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-24">
       <div className="w-full max-w-md space-y-4">

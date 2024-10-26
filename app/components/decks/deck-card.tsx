@@ -1,16 +1,12 @@
-// app/components/decks/deck-card.tsx
 'use client';
-
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Book, Clock, Code2, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { Deck } from '@prisma/client';
-
 interface DeckCardProps {
-  deck: any; // Replace with proper type when available
+  deck: any; 
 }
-
 export function DeckCard({ deck }: DeckCardProps) {
   return (
     <Card className="h-full p-6 hover:shadow-lg transition-shadow">
@@ -32,7 +28,6 @@ export function DeckCard({ deck }: DeckCardProps) {
             </p>
           )}
         </div>
-
         <div className="flex gap-4 text-sm text-muted-foreground">
           <div className="flex items-center gap-1">
             <Book className="w-4 h-4" />
@@ -45,7 +40,6 @@ export function DeckCard({ deck }: DeckCardProps) {
             </div>
           )}
         </div>
-
         {deck.tags.length > 0 && (
           <div className="flex flex-wrap gap-1">
             {deck.tags.map((tag: any) => (
@@ -58,7 +52,6 @@ export function DeckCard({ deck }: DeckCardProps) {
             ))}
           </div>
         )}
-
         <div className="flex justify-between items-center pt-4 border-t">
           <Link href={`/dashboard/decks/${deck.id}/study`}>
             <Button variant="outline" size="sm">

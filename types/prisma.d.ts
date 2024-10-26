@@ -1,6 +1,4 @@
-// types/prisma.d.ts
 import { Prisma } from '@prisma/client'
-
 declare global {
   namespace PrismaTypes {
     type UserWithRelations = Prisma.UserGetPayload<{

@@ -1,6 +1,4 @@
-// app/components/decks/reorderable-card-list.tsx
 'use client';
-
 import {
   DndContext,
   DragEndEvent,
@@ -28,7 +26,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Card as CardType } from '@/types/deck';
 import { CardSkeleton } from './card-skeleton';
-
 interface SortableCardProps {
   card: CardType;
   index: number;
@@ -36,7 +33,6 @@ interface SortableCardProps {
   onDelete: (card: CardType) => void;
   isLoading?: boolean;
 }
-
 function SortableCard({
   card,
   index,
@@ -52,17 +48,14 @@ function SortableCard({
     transition,
     isDragging,
   } = useSortable({ id: card.id });
-
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
     opacity: isDragging ? 0.5 : 1,
   };
-
   if (isLoading) {
     return <CardSkeleton />;
   }
-
   return (
     <div ref={setNodeRef} style={style}>
       <Card className="mb-4">
@@ -98,19 +91,16 @@ function SortableCard({
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-
           <div className="space-y-1">
             <p className="font-medium">Answer</p>
             <p className="text-muted-foreground">{card.back}</p>
           </div>
-
           {card.hint && (
             <div className="space-y-1">
               <p className="font-medium">Hint</p>
               <p className="text-sm text-muted-foreground italic">{card.hint}</p>
             </div>
           )}
-
           {card.code && (
             <div className="space-y-1">
               <p className="font-medium">Code Example</p>
@@ -124,7 +114,6 @@ function SortableCard({
     </div>
   );
 }
-
 interface ReorderableCardListProps {
   cards: CardType[];
   deckId: string;
@@ -133,7 +122,6 @@ interface ReorderableCardListProps {
   onReorder?: (orderedIds: string[]) => void;
   isLoading?: boolean;
 }
-
 export function ReorderableCardList({
   cards,
   deckId,
@@ -155,24 +143,19 @@ export function ReorderableCardList({
       },
     })
   );
-
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
-
     if (over && active.id !== over.id) {
       const oldIndex = cards.findIndex((card) => card.id === active.id);
       const newIndex = cards.findIndex((card) => card.id === over.id);
-      
       const newOrder = arrayMove(
         cards.map((card) => card.id),
         oldIndex,
         newIndex
       );
-
       onReorder?.(newOrder);
     }
   };
-
   if (cards.length === 0) {
     return (
       <div className="text-center py-8 text-muted-foreground">
@@ -180,7 +163,6 @@ export function ReorderableCardList({
       </div>
     );
   }
-
   return (
     <DndContext
       sensors={sensors}

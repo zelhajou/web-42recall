@@ -1,22 +1,18 @@
-// app/api/decks/route.ts
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import { prisma } from '@/app/lib/prisma';
 import { authOptions } from '@/app/lib/auth';
 import { z } from 'zod';
 import { Prisma } from '@prisma/client';
-
 const reorderSchema = z.object({
   orderedIds: z.array(z.string())
 });
-
 const CardSchema = z.object({
   front: z.string().min(1),
   back: z.string().min(1),
   hint: z.string().optional(),
   code: z.string().optional(),
 });
-
 const createDeckSchema = z.object({
   title: z.string().min(1).max(100),
   description: z.string().optional(),
@@ -25,14 +21,12 @@ const createDeckSchema = z.object({
   isPublic: z.boolean().default(false),
   cards: z.array(CardSchema)
 });
-
 export async function GET(req: Request) {
   try {
     const session = await getServerSession(authOptions);
     if (!session?.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-
     const { searchParams } = new URL(req.url);
     const page = Number(searchParams.get('page')) || 1;
     const limit = Number(searchParams.get('limit')) || 12;
@@ -40,8 +34,6 @@ export async function GET(req: Request) {
     const project = searchParams.get('project') || undefined;
     const topic = searchParams.get('topic') || undefined;
     const sort = searchParams.get('sort') || 'updated';
-
-    // Create properly typed where clause
     const where: Prisma.DeckWhereInput = {
       userId: session.user.id,
       ...(project && { project }),
@@ -63,8 +55,6 @@ export async function GET(req: Request) {
         ]
       })
     };
-
-    // Create properly typed orderBy
     const orderBy: Prisma.DeckOrderByWithRelationInput = (() => {
       switch (sort) {
         case 'created':
@@ -81,7 +71,6 @@ export async function GET(req: Request) {
           return { updatedAt: 'desc' };
       }
     })();
-
     const [decks, total] = await Promise.all([
       prisma.deck.findMany({
         where,
@@ -103,7 +92,6 @@ export async function GET(req: Request) {
       }),
       prisma.deck.count({ where })
     ]);
-
     return NextResponse.json({
       data: {
         decks,
@@ -123,17 +111,14 @@ export async function GET(req: Request) {
     );
   }
 }
-
 export async function POST(req: Request) {
   try {
     const session = await getServerSession(authOptions);
     if (!session?.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-
     const json = await req.json();
     const body = createDeckSchema.parse(json);
-
     const deck = await prisma.deck.create({
       data: {
         title: body.title,
@@ -170,7 +155,6 @@ export async function POST(req: Request) {
         }
       }
     });
-
     return NextResponse.json({ data: deck });
   } catch (error) {
     if (error instanceof z.ZodError) {

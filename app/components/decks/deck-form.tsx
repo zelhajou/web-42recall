@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -31,8 +30,6 @@ import {
 import { toast } from "@/components/ui/use-toast";
 import { ChevronLeft } from "lucide-react";
 import Link from 'next/link';
-
-
 const COMMON_42_PROJECTS = [
   "Libft",
   "ft_printf",
@@ -50,7 +47,6 @@ const COMMON_42_PROJECTS = [
   "ft_irc",
   "ft_transcendence",
 ] as const;
-
 const TOPICS = [
   "C Functions",
   "System Calls",
@@ -65,14 +61,12 @@ const TOPICS = [
   "Project Tips",
   "Common Errors",
 ] as const;
-
 interface Card {
   front: string;
   back: string;
   hint?: string;
   code?: string;
 }
-
 export function FortyTwoDeckForm() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -91,7 +85,6 @@ export function FortyTwoDeckForm() {
     hint: "",
     code: "",
   });
-
   const addCard = () => {
     if (currentCard.front && currentCard.back) {
       setFormData((prev) => ({
@@ -101,23 +94,19 @@ export function FortyTwoDeckForm() {
       setCurrentCard({ front: "", back: "", hint: "", code: "" });
     }
   };
-
   const removeCard = (index: number) => {
     setFormData((prev) => ({
       ...prev,
       cards: prev.cards.filter((_, i) => i !== index),
     }));
   };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-
     try {
       if (formData.cards.length === 0) {
         throw new Error("Add at least one card to create a deck");
       }
-
       const response = await fetch("/api/decks", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -135,19 +124,15 @@ export function FortyTwoDeckForm() {
           })),
         }),
       });
-
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || "Failed to create deck");
       }
-
       const { data } = await response.json();
-
       toast({
         title: "Success",
         description: "Deck created successfully!",
       });
-
       router.push(`/dashboard/decks/${data.id}`);
       router.refresh();
     } catch (error) {
@@ -162,7 +147,6 @@ export function FortyTwoDeckForm() {
       setIsLoading(false);
     }
   };
-
   const renderPreview = () => (
     <Card className="mt-8">
       <CardHeader>
@@ -190,7 +174,7 @@ export function FortyTwoDeckForm() {
       {showPreview && (
         <CardContent>
           <div className="space-y-6">
-            {/* Deck Info */}
+            {}
             <div className="space-y-4">
               <div className="flex flex-col space-y-2">
                 <h2 className="text-2xl font-bold">
@@ -202,8 +186,7 @@ export function FortyTwoDeckForm() {
                   </p>
                 )}
               </div>
-
-              {/* Metadata */}
+              {}
               <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
                 <div className="flex items-center gap-1">
                   <Book className="w-4 h-4" />
@@ -226,8 +209,7 @@ export function FortyTwoDeckForm() {
                   {formData.isPublic ? "Public" : "Private"}
                 </div>
               </div>
-
-              {/* Project & Topic Badges */}
+              {}
               <div className="flex flex-wrap gap-2">
                 {formData.project && (
                   <Badge variant="secondary">{formData.project}</Badge>
@@ -237,8 +219,7 @@ export function FortyTwoDeckForm() {
                 )}
               </div>
             </div>
-
-            {/* Cards Preview */}
+            {}
             <div className="space-y-4">
               <h3 className="text-lg font-semibold">Cards</h3>
               {formData.cards.length > 0 ? (
@@ -304,7 +285,6 @@ export function FortyTwoDeckForm() {
       )}
     </Card>
   );
-
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
@@ -315,7 +295,6 @@ export function FortyTwoDeckForm() {
           </Link>
         </Button>
       </div>
-
       <form onSubmit={handleSubmit} className="space-y-4">
         <Input
           placeholder="Deck Title"
@@ -325,7 +304,6 @@ export function FortyTwoDeckForm() {
           }
           required
         />
-
         <div className="grid gap-4 md:grid-cols-2">
           <Select
             value={formData.project}
@@ -344,7 +322,6 @@ export function FortyTwoDeckForm() {
               ))}
             </SelectContent>
           </Select>
-
           <Select
             value={formData.topic}
             onValueChange={(value) =>
@@ -363,7 +340,6 @@ export function FortyTwoDeckForm() {
             </SelectContent>
           </Select>
         </div>
-
         <Textarea
           placeholder="Deck Description"
           value={formData.description}
@@ -371,7 +347,6 @@ export function FortyTwoDeckForm() {
             setFormData((prev) => ({ ...prev, description: e.target.value }))
           }
         />
-
         <div className="flex items-center space-x-2">
           <Switch
             checked={formData.isPublic}
@@ -381,8 +356,7 @@ export function FortyTwoDeckForm() {
           />
           <label>Share with other 42 students</label>
         </div>
-
-        {/* Card Creation */}
+        {}
         <Card>
           <CardHeader>
             <CardTitle>Add New Card</CardTitle>
@@ -428,8 +402,7 @@ export function FortyTwoDeckForm() {
             </Button>
           </CardContent>
         </Card>
-
-        {/* Cards Preview */}
+        {}
         {formData.cards.length > 0 && (
           <div className="space-y-2">
             <div className="flex justify-between items-center">
@@ -481,7 +454,6 @@ export function FortyTwoDeckForm() {
             </div>
           </div>
         )}
-
         <div className="flex gap-2">
           <Button
             type="submit"
@@ -498,7 +470,6 @@ export function FortyTwoDeckForm() {
           </Button>
         </div>
       </form>
-
       {formData.cards.length === 0 && (
         <Alert>
           <AlertDescription>
@@ -508,11 +479,9 @@ export function FortyTwoDeckForm() {
           </AlertDescription>
         </Alert>
       )}
-
-      {/* Deck Preview Section */}
+      {}
       {renderPreview()}
     </div>
   );
 }
-
 export default FortyTwoDeckForm;

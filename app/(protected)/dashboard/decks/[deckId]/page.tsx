@@ -1,15 +1,12 @@
-// app/(protected)/dashboard/decks/[deckId]/page.tsx
 import { notFound } from 'next/navigation';
 import { prisma } from '@/app/lib/prisma';
 import { DeckDetails } from '@/components/decks/deck-details';
 import { Deck } from '@/types/deck';
-
 interface PageProps {
   params: {
     deckId: string;
   };
 }
-
 async function getDeck(deckId: string): Promise<Deck> {
   const deck = await prisma.deck.findUnique({
     where: { id: deckId },
@@ -32,12 +29,9 @@ async function getDeck(deckId: string): Promise<Deck> {
       }
     }
   });
-
   if (!deck) {
     notFound();
   }
-
-  // Convert dates to strings
   return {
     ...deck,
     createdAt: deck.createdAt.toISOString(),
@@ -49,7 +43,6 @@ async function getDeck(deckId: string): Promise<Deck> {
     }))
   };
 }
-
 export default async function DeckPage({ params }: PageProps) {
   const deck = await getDeck(params.deckId);
   return <DeckDetails deck={deck} />;

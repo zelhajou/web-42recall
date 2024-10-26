@@ -1,6 +1,4 @@
-// app/components/dialogs/add-card-dialog.tsx
 'use client';
-
 import { useState } from 'react';
 import {
   Dialog,
@@ -15,23 +13,19 @@ import { Textarea } from '@/components/ui/textarea';
 import { Loader2, Plus } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import type { Card } from '@/types/deck';
-
 type NewCard = Omit<Card, 'id' | 'order' | 'deckId' | 'createdAt' | 'updatedAt'>;
-
 interface AddCardDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   deckId: string;
   onAddCards: (cards: NewCard[]) => Promise<void>;
 }
-
 interface CardFormData {
   front: string;
   back: string;
   hint: string;
   code: string;
 }
-
 export function AddCardDialog({
   open,
   onOpenChange,
@@ -43,13 +37,10 @@ export function AddCardDialog({
   const [cards, setCards] = useState<CardFormData[]>([
     { front: '', back: '', hint: '', code: '' }
   ]);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-
     try {
-      // Filter and transform cards
       const validCards: NewCard[] = cards
         .filter(card => card.front.trim() && card.back.trim())
         .map(card => ({
@@ -58,17 +49,12 @@ export function AddCardDialog({
           hint: card.hint.trim() || null,
           code: card.code.trim() || null
         }));
-      
       if (validCards.length === 0) {
         throw new Error('At least one card is required');
       }
-
       await onAddCards(validCards);
-      
-      // Reset form
       setCards([{ front: '', back: '', hint: '', code: '' }]);
       onOpenChange(false);
-
       toast({
         title: 'Success',
         description: `Added ${validCards.length} cards successfully.`,
@@ -84,17 +70,14 @@ export function AddCardDialog({
       setIsLoading(false);
     }
   };
-
   const addCard = () => {
     setCards([...cards, { front: '', back: '', hint: '', code: '' }]);
   };
-
   const updateCard = (index: number, field: keyof CardFormData, value: string) => {
     setCards(cards.map((card, i) => 
       i === index ? { ...card, [field]: value } : card
     ));
   };
-
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-hidden flex flex-col">
@@ -104,7 +87,6 @@ export function AddCardDialog({
             Add new cards to your deck. Each card needs a front (question) and back (answer).
           </DialogDescription>
         </DialogHeader>
-
         <form onSubmit={handleSubmit} className="flex flex-col flex-1">
           <div className="space-y-4 overflow-y-auto flex-1 pr-6 -mr-6">
             {cards.map((card, index) => (
@@ -134,7 +116,6 @@ export function AddCardDialog({
                 />
               </div>
             ))}
-
             <Button
               type="button"
               variant="outline"
@@ -145,7 +126,6 @@ export function AddCardDialog({
               Add Another Card
             </Button>
           </div>
-
           <div className="flex justify-end gap-2 pt-4 border-t mt-4">
             <Button
               type="button"

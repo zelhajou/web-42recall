@@ -1,10 +1,8 @@
-// app/(protected)/dashboard/page.tsx
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/app/lib/auth';
 import { prisma } from '@/app/lib/prisma';
 import { DashboardOverview } from '@/components/dashboard/dashboard-overview';
 import { notFound } from 'next/navigation';
-
 async function getDashboardData(userId: string) {
   const data = await prisma.user.findUnique({
     where: { id: userId },
@@ -28,7 +26,7 @@ async function getDashboardData(userId: string) {
         orderBy: {
           updatedAt: 'desc'
         },
-        take: 6 // Limit to 6 most recent decks
+        take: 6 
       },
       _count: {
         select: { 
@@ -37,19 +35,14 @@ async function getDashboardData(userId: string) {
       }
     }
   });
-
   if (!data) {
     notFound();
   }
-
   return data;
 }
-
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
   if (!session?.user?.id) return null;
-
   const dashboardData = await getDashboardData(session.user.id);
-  
   return <DashboardOverview data={dashboardData} />;
 }

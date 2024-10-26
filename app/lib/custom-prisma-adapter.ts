@@ -1,11 +1,8 @@
-// app/lib/custom-prisma-adapter.ts
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import { prisma } from "./prisma"
 import { AdapterAccount } from "next-auth/adapters"
-
 export function CustomPrismaAdapter(p = prisma) {
   const adapter = PrismaAdapter(p)
-  
   return {
     ...adapter,
     createUser: adapter.createUser,
@@ -17,7 +14,6 @@ export function CustomPrismaAdapter(p = prisma) {
         secret_valid_until,
         ...accountData
       } = rawData as any
-
       const data = {
         id: accountData.id ?? undefined,
         userId: accountData.userId,
@@ -32,12 +28,10 @@ export function CustomPrismaAdapter(p = prisma) {
         id_token: accountData.id_token ?? undefined,
         session_state: accountData.session_state ?? undefined,
       }
-
       try {
         await p.account.create({
           data,
         })
-        // Return void instead of the account
         return
       } catch (error) {
         console.error("Error creating account:", error)

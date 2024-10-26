@@ -1,6 +1,4 @@
-// app/components/study/study-dashboard.tsx
 'use client';
-
 import { useRouter } from 'next/navigation';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -14,7 +12,6 @@ import {
   ChevronRight,
 } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
-
 interface StudyDashboardProps {
   data: {
     decks: any[];
@@ -25,28 +22,23 @@ interface StudyDashboardProps {
     };
   };
 }
-
 export function StudyDashboard({ data }: StudyDashboardProps) {
   const router = useRouter();
-
-  // Calculate study streak and other stats
   const totalSessions = data.stats._count._all;
   const totalCardsStudied = data.stats._sum.cardsStudied || 0;
   const averageCardsPerSession = totalSessions
     ? Math.round(totalCardsStudied / totalSessions)
     : 0;
-
   return (
     <div className="space-y-8">
-      {/* Header */}
+      {}
       <div>
         <h1 className="text-3xl font-bold">Study Dashboard</h1>
         <p className="text-muted-foreground mt-2">
           Track your progress and continue learning
         </p>
       </div>
-
-      {/* Stats Overview */}
+      {}
       <div className="grid gap-4 md:grid-cols-4">
         <Card>
           <CardContent className="p-6">
@@ -61,7 +53,6 @@ export function StudyDashboard({ data }: StudyDashboardProps) {
             </div>
           </CardContent>
         </Card>
-
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center justify-between space-x-4">
@@ -75,7 +66,6 @@ export function StudyDashboard({ data }: StudyDashboardProps) {
             </div>
           </CardContent>
         </Card>
-
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center justify-between space-x-4">
@@ -89,7 +79,6 @@ export function StudyDashboard({ data }: StudyDashboardProps) {
             </div>
           </CardContent>
         </Card>
-
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center justify-between space-x-4">
@@ -104,8 +93,7 @@ export function StudyDashboard({ data }: StudyDashboardProps) {
           </CardContent>
         </Card>
       </div>
-
-      {/* Decks Ready for Review */}
+      {}
       <Card>
         <CardHeader>
           <CardTitle>Ready for Review</CardTitle>
@@ -118,7 +106,6 @@ export function StudyDashboard({ data }: StudyDashboardProps) {
                 (card: any) => card.progress.length > 0
               ).length;
               const progress = (studiedCards / totalCards) * 100;
-
               return (
                 <div
                   key={deck.id}
@@ -150,8 +137,7 @@ export function StudyDashboard({ data }: StudyDashboardProps) {
           </div>
         </CardContent>
       </Card>
-
-      {/* Recent Study Sessions */}
+      {}
       <Card>
         <CardHeader>
           <CardTitle>Recent Sessions</CardTitle>

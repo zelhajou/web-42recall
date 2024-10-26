@@ -1,9 +1,7 @@
-// app/api/decks/[deckId]/cards/[cardId]/study/route.ts
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import { prisma } from '@/app/lib/prisma';
 import { authOptions } from '@/app/lib/auth';
-
 export async function POST(
   req: Request,
   { params }: { params: { deckId: string; cardId: string } }
@@ -13,10 +11,7 @@ export async function POST(
     if (!session?.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-
     const { isCorrect } = await req.json();
-
-    // Update or create card progress
     const progress = await prisma.cardProgress.upsert({
       where: {
         userId_cardId: {
@@ -27,7 +22,7 @@ export async function POST(
       update: {
         lastReviewed: new Date(),
         repetitions: { increment: 1 },
-        nextReview: new Date(), // You might want to implement spaced repetition logic here
+        nextReview: new Date(), 
       },
       create: {
         userId: session.user.id,
@@ -36,7 +31,6 @@ export async function POST(
         repetitions: 1,
       },
     });
-
     return NextResponse.json({ data: progress });
   } catch (error) {
     console.error('Error recording study progress:', error);

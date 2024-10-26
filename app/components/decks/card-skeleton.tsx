@@ -1,6 +1,4 @@
-// app/components/decks/card-skeleton.tsx
 import { Card, CardContent } from "@/components/ui/card";
-
 export function CardSkeleton() {
   return (
     <Card className="animate-pulse">

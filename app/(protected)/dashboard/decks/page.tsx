@@ -1,6 +1,4 @@
-// app/(protected)/dashboard/decks/page.tsx
 'use client';
-
 import { useEffect, useState } from 'react';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import { Card } from '@/components/ui/card';
@@ -11,19 +9,16 @@ import { Pagination } from '@/components/ui/pagination';
 import { PlusCircle } from 'lucide-react';
 import Link from 'next/link';
 import { DeckFilters as DeckFiltersType, PaginationState } from '@/types/deck';
-
 const DEFAULT_FILTERS: DeckFiltersType = {
   search: '',
   project: null,
   topic: null,
   sortBy: 'updated'
 };
-
 export default function DecksPage() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  
   const [isLoading, setIsLoading] = useState(true);
   const [decks, setDecks] = useState<any[]>([]);
   const [filters, setFilters] = useState<DeckFiltersType>(DEFAULT_FILTERS);
@@ -33,18 +28,15 @@ export default function DecksPage() {
     total: 0,
     pages: 0
   });
-
   useEffect(() => {
     const page = Number(searchParams.get('page')) || 1;
     const search = searchParams.get('search') || '';
     const project = searchParams.get('project');
     const topic = searchParams.get('topic');
     const sortBy = (searchParams.get('sort') as DeckFiltersType['sortBy']) || 'updated';
-
     setFilters({ search, project, topic, sortBy });
     setPagination(prev => ({ ...prev, page }));
   }, [searchParams]);
-
   useEffect(() => {
     const fetchDecks = async () => {
       setIsLoading(true);
@@ -57,32 +49,24 @@ export default function DecksPage() {
           ...(filters.topic && { topic: filters.topic }),
           sort: filters.sortBy
         });
-
         const response = await fetch(`/api/decks?${queryParams}`);
         const data = await response.json();
-
         if (!response.ok) throw new Error(data.error);
-
         setDecks(data.data.decks);
         setPagination(data.data.pagination);
       } catch (error) {
         console.error('Error fetching decks:', error);
-        // You might want to show an error toast here
       } finally {
         setIsLoading(false);
       }
     };
-
     fetchDecks();
   }, [filters, pagination.page, pagination.limit]);
-
   const handleFiltersChange = (newFilters: DeckFiltersType) => {
     const params = new URLSearchParams();
-
     searchParams.forEach((value, key) => {
       params.append(key, value);
     });
-    
     Object.entries(newFilters).forEach(([key, value]) => {
       if (value) {
         params.set(key, value);
@@ -90,21 +74,17 @@ export default function DecksPage() {
         params.delete(key);
       }
     });
-    
     params.set('page', '1');
     router.push(`${pathname}?${params.toString()}`);
   };
-
   const handlePageChange = (newPage: number) => {
     const params = new URLSearchParams();
-    // Copy existing params
     searchParams.forEach((value, key) => {
       params.set(key, value);
     });
     params.set('page', newPage.toString());
     router.push(`${pathname}?${params.toString()}`);
   };
-
   return (
     <div className="max-w-7xl mx-auto py-8 space-y-6">
       <div className="flex justify-between items-center">
@@ -114,7 +94,6 @@ export default function DecksPage() {
             Manage and study your flashcard decks
           </p>
         </div>
-        
         <Link href="/dashboard/create">
           <Button>
             <PlusCircle className="w-4 h-4 mr-2" />
@@ -122,9 +101,7 @@ export default function DecksPage() {
           </Button>
         </Link>
       </div>
-
       <DeckFilters filters={filters} onChange={handleFiltersChange} />
-
       {isLoading ? (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {[...Array(6)].map((_, i) => (
@@ -163,7 +140,6 @@ export default function DecksPage() {
               </Link>
             ))}
           </div>
-
           <Pagination 
             pagination={pagination}
             onChange={handlePageChange}

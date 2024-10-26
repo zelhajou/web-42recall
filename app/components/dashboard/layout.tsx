@@ -1,6 +1,4 @@
-// app/components/dashboard/layout.tsx
 'use client';
-
 import { Fragment } from 'react';
 import { useSession, signOut } from 'next-auth/react';
 import { Menu, Transition } from '@headlessui/react';
@@ -18,26 +16,21 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import { ThemeToggle } from '@/components/theme-toggle';
-
-
 interface DashboardLayoutProps {
   children: React.ReactNode;
 }
-
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
   { name: 'Create Deck', href: '/dashboard/create', icon: PlusCircleIcon },
   { name: 'Study', href: '/dashboard/study', icon: BookOpenIcon },
   { name: 'Settings', href: '/dashboard/settings', icon: Cog6ToothIcon },
 ];
-
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const { data: session } = useSession();
   const pathname = usePathname();
-
   return (
     <div className="min-h-screen bg-background">
-      {/* Navigation */}
+      {}
       <nav className="fixed top-0 z-50 w-full bg-background border-b">
         <div className="px-3 py-3 lg:px-5 lg:pl-3">
           <div className="flex items-center justify-between">
@@ -50,9 +43,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             </div>
             <div className="flex items-center ">
               <ThemeToggle />
-            
-
-              {/* Profile dropdown */}
+              {}
               <Menu as="div" className="relative ml-3">
                 <div>
                   <Menu.Button className="flex items-center max-w-xs gap-2 p-2 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-white">
@@ -100,15 +91,13 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           </div>
         </div>
       </nav>
-
-      {/* Sidebar */}
+      {}
       <aside className="fixed top-[3.75rem] left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0">
         <div className="h-full px-3 py-4 overflow-y-auto bg-background text-foreground border-r ">
           <ul className="space-y-2 font-medium">
             {navigation.map((item) => {
               const Icon = item.icon;
               const isActive = pathname === item.href;
-
               return (
                 <li key={item.name}>
                   <Link
@@ -134,8 +123,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           </ul>
         </div>
       </aside>
-
-      {/* Main content */}
+      {}
       <div className="p-4 sm:ml-64 mt-14">
         <div className="p-4 rounded-lg">
           {children}

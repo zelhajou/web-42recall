@@ -1,8 +1,5 @@
-// app/contexts/deck-context.tsx
 'use client';
-
 import { createContext, useContext, useReducer, ReactNode } from 'react';
-
 interface DeckState {
   decks: any[];
   isLoading: boolean;
@@ -20,19 +17,16 @@ interface DeckState {
     pages: number;
   };
 }
-
 type DeckAction =
   | { type: 'SET_DECKS'; payload: any[] }
   | { type: 'SET_LOADING'; payload: boolean }
   | { type: 'SET_ERROR'; payload: string | null }
   | { type: 'SET_FILTERS'; payload: Partial<DeckState['filters']> }
   | { type: 'SET_PAGINATION'; payload: Partial<DeckState['pagination']> };
-
 const DeckContext = createContext<{
   state: DeckState;
   dispatch: React.Dispatch<DeckAction>;
 } | null>(null);
-
 const initialState: DeckState = {
   decks: [],
   isLoading: false,
@@ -50,7 +44,6 @@ const initialState: DeckState = {
     pages: 0
   }
 };
-
 function deckReducer(state: DeckState, action: DeckAction): DeckState {
   switch (action.type) {
     case 'SET_DECKS':
@@ -74,17 +67,14 @@ function deckReducer(state: DeckState, action: DeckAction): DeckState {
       return state;
   }
 }
-
 export function DeckProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(deckReducer, initialState);
-
   return (
     <DeckContext.Provider value={{ state, dispatch }}>
       {children}
     </DeckContext.Provider>
   );
 }
-
 export function useDeck() {
   const context = useContext(DeckContext);
   if (!context) {

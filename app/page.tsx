@@ -1,12 +1,11 @@
 import { LoginButton } from './components/auth/login-button';
 import { Button } from "@/components/ui/button";
 import { Brain, Zap, Users } from 'lucide-react';
-
 export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 text-white flex items-center justify-center p-4">
       <div className="max-w-5xl w-full mx-auto grid md:grid-cols-2 gap-8 items-center">
-        {/* Text Section */}
+        {}
         <div className="space-y-6">
           <h1 className="text-5xl font-extrabold tracking-tight leading-tight">
             Master 42 with
@@ -21,8 +20,7 @@ export default function Home() {
             <LoginButton />
           </div>
         </div>
-
-        {/* Features Section */}
+        {}
         <div className="relative">
           <div className="absolute inset-0 bg-blue-500 rounded-full filter blur-3xl opacity-30 animate-pulse"></div>
           <div className="relative bg-gray-800 rounded-2xl p-6 shadow-2xl transition-transform transform hover:scale-105">
