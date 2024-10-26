@@ -30,11 +30,10 @@ A spaced repetition flashcard application designed specifically for 42 School st
     - [👥 Collaboration Features](#-collaboration-features)
         - [🌙 Dark Mode Support](#-dark-mode-support)
         - [📱 Responsive Design](#-responsive-design)
-    - [💡 Example Use Cases](#-example-use-cases)
-        - [Project Preparation](#project-preparation)
-        - [Exam Preparation](#exam-preparation)
-        - [Concept Mastery](#concept-mastery)
-
+- [💡 Example Use Cases](#-example-use-cases)
+    - [Project Preparation](#project-preparation)
+    - [Exam Preparation](#exam-preparation)
+    - [Concept Mastery](#concept-mastery)
 
 ## Features
 
