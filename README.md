@@ -218,6 +218,7 @@ Clean and simple authentication using your 42 School credentials. Single-click l
 
 #### 🎴 Deck Management
 ![Deck Management](public/showcase/decks.png)
+![Deck Management](public/showcase/decks2.png)
 Organize your study materials by:
 - 42 School projects
 - Topics and concepts
