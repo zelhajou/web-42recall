@@ -28,7 +28,7 @@ export function ShareDeckDialog({
   const [copied, setCopied] = useState(false);
   const [shareUrl, setShareUrl] = useState('');
   useEffect(() => {
-    setShareUrl(`${window.location.origin}/decks/${deck.id}`);
+    setShareUrl(`${window.location.origin}/dashboard/decks/${deck.id}`);
   }, [deck.id]);
   const copyToClipboard = async () => {
     try {
