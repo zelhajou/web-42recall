@@ -1,36 +1,5 @@
-// lib/utils.ts
-import { type ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
-import { Deck } from '@/types/deck';
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
-}
-
-export function convertPrismaDatesToStrings<T>(obj: T): T {
-  if (obj === null || obj === undefined) {
-    return obj;
-  }
-
-  if (obj instanceof Date) {
-    return obj.toISOString() as unknown as T;
-  }
-
-  if (Array.isArray(obj)) {
-    return obj.map(convertPrismaDatesToStrings) as unknown as T;
-  }
-
-  if (typeof obj === 'object') {
-    const converted: any = {};
-    for (const [key, value] of Object.entries(obj)) {
-      converted[key] = convertPrismaDatesToStrings(value);
-    }
-    return converted;
-  }
-
-  return obj;
-}
-
+// app/lib/transformers.ts
+import { Deck, Card, User, Tag } from '@/types/deck';
 
 export function transformPrismaDeckToApp(prismaDeck: any): Deck {
   return {

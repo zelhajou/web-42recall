@@ -4,6 +4,7 @@ import { getServerSession } from 'next-auth/next';
 import { prisma } from '@/app/lib/prisma';
 import { authOptions } from '@/app/lib/auth';
 import { z } from 'zod';
+import { Prisma } from '@prisma/client';
 
 const reorderSchema = z.object({
   orderedIds: z.array(z.string())
@@ -40,19 +41,31 @@ export async function GET(req: Request) {
     const topic = searchParams.get('topic') || undefined;
     const sort = searchParams.get('sort') || 'updated';
 
-    const where = {
+    // Create properly typed where clause
+    const where: Prisma.DeckWhereInput = {
       userId: session.user.id,
-      ...(search && {
-        OR: [
-          { title: { contains: search, mode: 'insensitive' } },
-          { description: { contains: search, mode: 'insensitive' } },
-        ],
-      }),
       ...(project && { project }),
       ...(topic && { topic }),
+      ...(search && {
+        OR: [
+          {
+            title: {
+              contains: search,
+              mode: 'insensitive' as Prisma.QueryMode
+            }
+          },
+          {
+            description: {
+              contains: search,
+              mode: 'insensitive' as Prisma.QueryMode
+            }
+          }
+        ]
+      })
     };
 
-    const orderBy = (() => {
+    // Create properly typed orderBy
+    const orderBy: Prisma.DeckOrderByWithRelationInput = (() => {
       switch (sort) {
         case 'created':
           return { createdAt: 'desc' };
@@ -111,8 +124,7 @@ export async function GET(req: Request) {
   }
 }
 
-
-export async function POST(req: Request) {  // Remove params parameter
+export async function POST(req: Request) {
   try {
     const session = await getServerSession(authOptions);
     if (!session?.user) {
@@ -122,7 +134,6 @@ export async function POST(req: Request) {  // Remove params parameter
     const json = await req.json();
     const body = createDeckSchema.parse(json);
 
-    // Create deck with cards in a transaction
     const deck = await prisma.deck.create({
       data: {
         title: body.title,
@@ -163,14 +174,12 @@ export async function POST(req: Request) {  // Remove params parameter
     return NextResponse.json({ data: deck });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ 
-        error: 'Validation error', 
-        details: error.errors 
-      }, { status: 400 });
+      return NextResponse.json({ error: error.errors }, { status: 400 });
     }
     console.error('Error creating deck:', error);
-    return NextResponse.json({ 
-      error: 'Internal Server Error' 
-    }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Internal Server Error' }, 
+      { status: 500 }
+    );
   }
 }

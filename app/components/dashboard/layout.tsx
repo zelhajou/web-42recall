@@ -1,39 +1,37 @@
 // app/components/dashboard/layout.tsx
-'use client'
+'use client';
 
-import { Fragment } from 'react'
-import { useSession, signOut } from 'next-auth/react'
-import { Menu, Transition } from '@headlessui/react'
+import { Fragment } from 'react';
+import { useSession, signOut } from 'next-auth/react';
+import { Menu, Transition } from '@headlessui/react';
 import { 
   HomeIcon, 
-  RectangleStackIcon,
+  PlusCircleIcon, 
   BookOpenIcon, 
-  Cog6ToothIcon, 
+  Cog6ToothIcon,
   BellIcon,
   ChevronDownIcon,
   ArrowLeftOnRectangleIcon,
   UserCircleIcon
-} from '@heroicons/react/24/outline'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import clsx from 'clsx'
+} from '@heroicons/react/24/outline';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import clsx from 'clsx';
 
 interface DashboardLayoutProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
-
-
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
-  { name: 'Decks', href: '/dashboard/decks', icon: RectangleStackIcon },
+  { name: 'Create Deck', href: '/dashboard/create', icon: PlusCircleIcon },
   { name: 'Study', href: '/dashboard/study', icon: BookOpenIcon },
   { name: 'Settings', href: '/dashboard/settings', icon: Cog6ToothIcon },
-]
+];
 
-export function DashboardLayout({ children }: DashboardLayoutProps) {
-  const { data: session } = useSession()
-  const pathname = usePathname()
+export default function DashboardLayout({ children }: DashboardLayoutProps) {
+  const { data: session } = useSession();
+  const pathname = usePathname();
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -110,8 +108,8 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
         <div className="h-full px-3 py-4 overflow-y-auto bg-white border-r border-gray-200">
           <ul className="space-y-2 font-medium">
             {navigation.map((item) => {
-              const Icon = item.icon
-              const isActive = pathname === item.href
+              const Icon = item.icon;
+              const isActive = pathname === item.href;
 
               return (
                 <li key={item.name}>
@@ -133,7 +131,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                     {item.name}
                   </Link>
                 </li>
-              )
+              );
             })}
           </ul>
         </div>
@@ -146,5 +144,5 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
         </div>
       </div>
     </div>
-  )
+  );
 }
