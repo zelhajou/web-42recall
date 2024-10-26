@@ -1,14 +1,14 @@
+// app/components/decks/deck-filters.tsx
 'use client';
 
 import { Input } from '@/components/ui/input';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
+import { 
+  Select, 
+  SelectTrigger, 
+  SelectValue, 
+  SelectContent, 
+  SelectItem 
 } from '@/components/ui/select';
-
 import type { DeckFilters } from '@/types/deck';
 
 const COMMON_42_PROJECTS = [
@@ -26,8 +26,9 @@ const COMMON_42_PROJECTS = [
   'CPP Modules',
   'inception',
   'ft_irc',
-  'ft_transcendence',
+  'ft_transcendence'
 ] as const;
+
 const TOPICS = [
   'C Functions',
   'System Calls',
@@ -40,32 +41,35 @@ const TOPICS = [
   'Docker',
   'Git Commands',
   'Project Tips',
-  'Common Errors',
+  'Common Errors'
 ] as const;
+
 const SORT_OPTIONS = [
   { label: 'Recently Updated', value: 'updated' },
   { label: 'Recently Created', value: 'created' },
   { label: 'Alphabetical', value: 'alpha' },
-  { label: 'Cards Count', value: 'cards' },
+  { label: 'Most Cards', value: 'cards' },
+  { label: 'Most Popular', value: 'popular' },
 ] as const;
+
 interface DeckFiltersProps {
   filters: DeckFilters;
   onChange: (filters: DeckFilters) => void;
 }
+
 export function DeckFilters({ filters, onChange }: DeckFiltersProps) {
   return (
     <div className="flex flex-col sm:flex-row gap-2">
-      <Input
-        placeholder="Search decks..."
+      <Input 
+        placeholder="Search decks or creators..."
         className="max-w-xs"
         value={filters.search}
         onChange={(e) => onChange({ ...filters, search: e.target.value })}
       />
-      <Select
-        value={filters.project || 'all'}
-        onValueChange={(value) =>
-          onChange({ ...filters, project: value === 'all' ? null : value })
-        }
+      
+      <Select 
+        value={filters.project || 'all'} 
+        onValueChange={(value) => onChange({ ...filters, project: value === 'all' ? null : value })}
       >
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Project" />
@@ -79,11 +83,10 @@ export function DeckFilters({ filters, onChange }: DeckFiltersProps) {
           ))}
         </SelectContent>
       </Select>
-      <Select
-        value={filters.topic || 'all'}
-        onValueChange={(value) =>
-          onChange({ ...filters, topic: value === 'all' ? null : value })
-        }
+
+      <Select 
+        value={filters.topic || 'all'} 
+        onValueChange={(value) => onChange({ ...filters, topic: value === 'all' ? null : value })}
       >
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Topic" />
@@ -97,8 +100,9 @@ export function DeckFilters({ filters, onChange }: DeckFiltersProps) {
           ))}
         </SelectContent>
       </Select>
-      <Select
-        value={filters.sortBy}
+
+      <Select 
+        value={filters.sortBy} 
         onValueChange={(value: any) => onChange({ ...filters, sortBy: value })}
       >
         <SelectTrigger className="w-[180px]">

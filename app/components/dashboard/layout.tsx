@@ -5,15 +5,17 @@ import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, Transition } from '@headlessui/react';
-import {
-  ArrowLeftOnRectangleIcon,
-  BellIcon,
-  BookOpenIcon,
-  ChevronDownIcon,
+import { 
+  HomeIcon, 
+  PlusCircleIcon, 
+  BookOpenIcon, 
   Cog6ToothIcon,
-  HomeIcon,
-  PlusCircleIcon,
+  BellIcon,
+  ChevronDownIcon,
+  ArrowLeftOnRectangleIcon,
   UserCircleIcon,
+  GlobeAltIcon,
+  RectangleStackIcon
 } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import { ThemeToggle } from '@/components/theme-toggle';
@@ -24,8 +26,9 @@ interface DashboardLayoutProps {
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
-  { name: 'Create Deck', href: '/dashboard/create', icon: PlusCircleIcon },
+  { name: 'My Decks', href: '/dashboard/decks', icon: RectangleStackIcon },
   { name: 'Study', href: '/dashboard/study', icon: BookOpenIcon },
+  { name: 'Explore', href: '/dashboard/explore', icon: GlobeAltIcon },
   { name: 'Settings', href: '/dashboard/settings', icon: Cog6ToothIcon },
 ];
 
