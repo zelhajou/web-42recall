@@ -1,6 +1,9 @@
+import { Brain, Users, Zap } from 'lucide-react';
+
+import { Button } from '@/components/ui/button';
+
 import { LoginButton } from './components/auth/login-button';
-import { Button } from "@/components/ui/button";
-import { Brain, Zap, Users } from 'lucide-react';
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 text-white flex items-center justify-center p-4">
@@ -14,7 +17,8 @@ export default function Home() {
             </span>
           </h1>
           <p className="text-xl text-gray-300">
-            Elevate your coding skills using our advanced spaced repetition system tailored for 42 School students.
+            Elevate your coding skills using our advanced spaced repetition
+            system tailored for 42 School students.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <LoginButton />
@@ -26,14 +30,35 @@ export default function Home() {
           <div className="relative bg-gray-800 rounded-2xl p-6 shadow-2xl transition-transform transform hover:scale-105">
             <div className="grid grid-cols-2 gap-4">
               {[
-                { icon: Brain, title: "Optimized Learning", description: "Scientifically proven spaced repetition" },
-                { icon: Zap, title: "Quick Recall", description: "Boost your coding memory retention" },
-                { icon: Users, title: "Peer Learning", description: "Share and collaborate on flashcard decks" },
-                { icon: Users, title: "42 Focused", description: "Content tailored for 42 School curriculum" },
+                {
+                  icon: Brain,
+                  title: 'Optimized Learning',
+                  description: 'Scientifically proven spaced repetition',
+                },
+                {
+                  icon: Zap,
+                  title: 'Quick Recall',
+                  description: 'Boost your coding memory retention',
+                },
+                {
+                  icon: Users,
+                  title: 'Peer Learning',
+                  description: 'Share and collaborate on flashcard decks',
+                },
+                {
+                  icon: Users,
+                  title: '42 Focused',
+                  description: 'Content tailored for 42 School curriculum',
+                },
               ].map((feature, index) => (
-                <div key={index} className="flex flex-col items-center text-center p-4 bg-gray-700 rounded-lg transition-transform transform hover:scale-105">
+                <div
+                  key={index}
+                  className="flex flex-col items-center text-center p-4 bg-gray-700 rounded-lg transition-transform transform hover:scale-105"
+                >
                   <feature.icon className="w-12 h-12 text-blue-400 mb-2 transition-colors hover:text-blue-300" />
-                  <h3 className="font-semibold mb-1 text-lg">{feature.title}</h3>
+                  <h3 className="font-semibold mb-1 text-lg">
+                    {feature.title}
+                  </h3>
                   <p className="text-sm text-gray-300">{feature.description}</p>
                 </div>
               ))}

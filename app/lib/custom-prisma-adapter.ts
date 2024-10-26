@@ -1,19 +1,18 @@
-import { PrismaAdapter } from "@auth/prisma-adapter"
-import { prisma } from "./prisma"
-import { AdapterAccount } from "next-auth/adapters"
+import { AdapterAccount } from 'next-auth/adapters';
+
+import { PrismaAdapter } from '@auth/prisma-adapter';
+
+import { prisma } from './prisma';
+
 export function CustomPrismaAdapter(p = prisma) {
-  const adapter = PrismaAdapter(p)
+  const adapter = PrismaAdapter(p);
   return {
     ...adapter,
     createUser: adapter.createUser,
     getUser: adapter.getUser,
     getUserByEmail: adapter.getUserByEmail,
     async linkAccount(rawData: AdapterAccount) {
-      const {
-        created_at,
-        secret_valid_until,
-        ...accountData
-      } = rawData as any
+      const { created_at, secret_valid_until, ...accountData } = rawData as any;
       const data = {
         id: accountData.id ?? undefined,
         userId: accountData.userId,
@@ -27,16 +26,16 @@ export function CustomPrismaAdapter(p = prisma) {
         scope: accountData.scope ?? undefined,
         id_token: accountData.id_token ?? undefined,
         session_state: accountData.session_state ?? undefined,
-      }
+      };
       try {
         await p.account.create({
           data,
-        })
-        return
+        });
+        return;
       } catch (error) {
-        console.error("Error creating account:", error)
-        throw error
+        console.error('Error creating account:', error);
+        throw error;
       }
     },
-  }
+  };
 }

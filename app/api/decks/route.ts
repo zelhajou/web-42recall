@@ -1,11 +1,13 @@
-import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
-import { prisma } from '@/app/lib/prisma';
+import { NextResponse } from 'next/server';
+
 import { authOptions } from '@/app/lib/auth';
-import { z } from 'zod';
+import { prisma } from '@/app/lib/prisma';
 import { Prisma } from '@prisma/client';
+import { z } from 'zod';
+
 const reorderSchema = z.object({
-  orderedIds: z.array(z.string())
+  orderedIds: z.array(z.string()),
 });
 const CardSchema = z.object({
   front: z.string().min(1),
@@ -19,7 +21,7 @@ const createDeckSchema = z.object({
   project: z.string().optional(),
   topic: z.string().optional(),
   isPublic: z.boolean().default(false),
-  cards: z.array(CardSchema)
+  cards: z.array(CardSchema),
 });
 export async function GET(req: Request) {
   try {
@@ -43,17 +45,17 @@ export async function GET(req: Request) {
           {
             title: {
               contains: search,
-              mode: 'insensitive' as Prisma.QueryMode
-            }
+              mode: 'insensitive' as Prisma.QueryMode,
+            },
           },
           {
             description: {
               contains: search,
-              mode: 'insensitive' as Prisma.QueryMode
-            }
-          }
-        ]
-      })
+              mode: 'insensitive' as Prisma.QueryMode,
+            },
+          },
+        ],
+      }),
     };
     const orderBy: Prisma.DeckOrderByWithRelationInput = (() => {
       switch (sort) {
@@ -64,8 +66,8 @@ export async function GET(req: Request) {
         case 'cards':
           return {
             cards: {
-              _count: 'desc'
-            }
+              _count: 'desc',
+            },
           };
         default:
           return { updatedAt: 'desc' };
@@ -76,21 +78,21 @@ export async function GET(req: Request) {
         where,
         include: {
           _count: {
-            select: { cards: true }
+            select: { cards: true },
           },
           tags: true,
           user: {
             select: {
               name: true,
-              image: true
-            }
-          }
+              image: true,
+            },
+          },
         },
         orderBy,
         skip: (page - 1) * limit,
         take: limit,
       }),
-      prisma.deck.count({ where })
+      prisma.deck.count({ where }),
     ]);
     return NextResponse.json({
       data: {
@@ -99,14 +101,14 @@ export async function GET(req: Request) {
           page,
           limit,
           total,
-          pages: Math.ceil(total / limit)
-        }
-      }
+          pages: Math.ceil(total / limit),
+        },
+      },
     });
   } catch (error) {
     console.error('Error fetching decks:', error);
     return NextResponse.json(
-      { error: 'Internal Server Error' }, 
+      { error: 'Internal Server Error' },
       { status: 500 }
     );
   }
@@ -133,27 +135,27 @@ export async function POST(req: Request) {
             back: card.back,
             hint: card.hint || null,
             code: card.code || null,
-            order: index
-          }))
-        }
+            order: index,
+          })),
+        },
       },
       include: {
         cards: {
           orderBy: {
-            order: 'asc'
-          }
+            order: 'asc',
+          },
         },
         tags: true,
         user: {
           select: {
             id: true,
             name: true,
-          }
+          },
         },
         _count: {
-          select: { cards: true }
-        }
-      }
+          select: { cards: true },
+        },
+      },
     });
     return NextResponse.json({ data: deck });
   } catch (error) {
@@ -162,7 +164,7 @@ export async function POST(req: Request) {
     }
     console.error('Error creating deck:', error);
     return NextResponse.json(
-      { error: 'Internal Server Error' }, 
+      { error: 'Internal Server Error' },
       { status: 500 }
     );
   }

@@ -1,8 +1,10 @@
-import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth/next";
-import { prisma } from "@/app/lib/prisma";
-import { authOptions } from "@/app/lib/auth";
-import { z } from "zod";
+import { getServerSession } from 'next-auth/next';
+import { NextResponse } from 'next/server';
+
+import { authOptions } from '@/app/lib/auth';
+import { prisma } from '@/app/lib/prisma';
+import { z } from 'zod';
+
 const updateDeckSchema = z.object({
   title: z.string().min(1).max(100),
   description: z.string().optional(),
@@ -31,22 +33,22 @@ export async function PATCH(
           select: {
             id: true,
             name: true,
-            image: true
-          }
+            image: true,
+          },
         },
         _count: {
-          select: { cards: true }
-        }
-      }
+          select: { cards: true },
+        },
+      },
     });
     return NextResponse.json({ data: deck });
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: error.errors }, { status: 400 });
     }
-    console.error("Error updating deck:", error);
+    console.error('Error updating deck:', error);
     return NextResponse.json(
-      { error: "Internal Server Error" },
+      { error: 'Internal Server Error' },
       { status: 500 }
     );
   }
@@ -58,26 +60,26 @@ export async function DELETE(
   try {
     const session = await getServerSession(authOptions);
     if (!session?.user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
     const deck = await prisma.deck.findUnique({
       where: { id: params.deckId },
       select: { userId: true },
     });
     if (!deck) {
-      return NextResponse.json({ error: "Deck not found" }, { status: 404 });
+      return NextResponse.json({ error: 'Deck not found' }, { status: 404 });
     }
     if (deck.userId !== session.user.id) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
     await prisma.deck.delete({
       where: { id: params.deckId },
     });
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Error deleting deck:", error);
+    console.error('Error deleting deck:', error);
     return NextResponse.json(
-      { error: "Internal Server Error" },
+      { error: 'Internal Server Error' },
       { status: 500 }
     );
   }
@@ -89,14 +91,14 @@ export async function GET(
   try {
     const session = await getServerSession(authOptions);
     if (!session?.user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
     const deck = await prisma.deck.findUnique({
       where: { id: params.deckId },
       include: {
         cards: {
           orderBy: {
-            order: "asc",
+            order: 'asc',
           },
         },
         tags: true,
@@ -113,16 +115,16 @@ export async function GET(
       },
     });
     if (!deck) {
-      return NextResponse.json({ error: "Deck not found" }, { status: 404 });
+      return NextResponse.json({ error: 'Deck not found' }, { status: 404 });
     }
     if (deck.userId !== session.user.id && !deck.isPublic) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
     return NextResponse.json({ data: deck });
   } catch (error) {
-    console.error("Error fetching deck:", error);
+    console.error('Error fetching deck:', error);
     return NextResponse.json(
-      { error: "Internal Server Error" },
+      { error: 'Internal Server Error' },
       { status: 500 }
     );
   }

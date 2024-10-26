@@ -1,5 +1,10 @@
 'use client';
-import { useState, useEffect } from 'react';  
+
+import { useEffect, useState } from 'react';
+
+import { Loader2 } from 'lucide-react';
+
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -7,12 +12,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Loader2 } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
+
 import { Card as CardType } from '@/types/deck';
+
 interface EditCardDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -25,7 +30,7 @@ export function EditCardDialog({
   onOpenChange,
   card,
   deckId,
-  onUpdate
+  onUpdate,
 }: EditCardDialogProps) {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
@@ -74,9 +79,7 @@ export function EditCardDialog({
       <DialogContent className="sm:max-w-[600px]">
         <DialogHeader>
           <DialogTitle>Edit Card</DialogTitle>
-          <DialogDescription>
-            Make changes to your flashcard.
-          </DialogDescription>
+          <DialogDescription>Make changes to your flashcard.</DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-4">
@@ -87,7 +90,9 @@ export function EditCardDialog({
               <Input
                 id="front"
                 value={formData.front}
-                onChange={e => setFormData(prev => ({ ...prev, front: e.target.value }))}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, front: e.target.value }))
+                }
                 required
                 placeholder="Enter the question or front of the card"
               />
@@ -99,7 +104,9 @@ export function EditCardDialog({
               <Textarea
                 id="back"
                 value={formData.back}
-                onChange={e => setFormData(prev => ({ ...prev, back: e.target.value }))}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, back: e.target.value }))
+                }
                 required
                 placeholder="Enter the answer or back of the card"
               />
@@ -111,7 +118,9 @@ export function EditCardDialog({
               <Input
                 id="hint"
                 value={formData.hint}
-                onChange={e => setFormData(prev => ({ ...prev, hint: e.target.value }))}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, hint: e.target.value }))
+                }
                 placeholder="Add a helpful hint"
               />
             </div>
@@ -122,7 +131,9 @@ export function EditCardDialog({
               <Textarea
                 id="code"
                 value={formData.code}
-                onChange={e => setFormData(prev => ({ ...prev, code: e.target.value }))}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, code: e.target.value }))
+                }
                 placeholder="Add a code example"
                 className="font-mono"
                 rows={4}

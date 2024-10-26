@@ -1,5 +1,7 @@
 'use client';
-import { createContext, useContext, useReducer, ReactNode } from 'react';
+
+import { ReactNode, createContext, useContext, useReducer } from 'react';
+
 interface DeckState {
   decks: any[];
   isLoading: boolean;
@@ -35,14 +37,14 @@ const initialState: DeckState = {
     search: '',
     project: null,
     topic: null,
-    sortBy: 'updated'
+    sortBy: 'updated',
   },
   pagination: {
     page: 1,
     limit: 12,
     total: 0,
-    pages: 0
-  }
+    pages: 0,
+  },
 };
 function deckReducer(state: DeckState, action: DeckAction): DeckState {
   switch (action.type) {
@@ -53,15 +55,15 @@ function deckReducer(state: DeckState, action: DeckAction): DeckState {
     case 'SET_ERROR':
       return { ...state, error: action.payload };
     case 'SET_FILTERS':
-      return { 
-        ...state, 
+      return {
+        ...state,
         filters: { ...state.filters, ...action.payload },
-        pagination: { ...state.pagination, page: 1 }
+        pagination: { ...state.pagination, page: 1 },
       };
     case 'SET_PAGINATION':
-      return { 
-        ...state, 
-        pagination: { ...state.pagination, ...action.payload }
+      return {
+        ...state,
+        pagination: { ...state.pagination, ...action.payload },
       };
     default:
       return state;

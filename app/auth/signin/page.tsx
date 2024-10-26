@@ -1,16 +1,24 @@
 // app/auth/signin/page.tsx
-import { getServerSession } from 'next-auth/next'
-import { redirect } from 'next/navigation'
-import { authOptions } from '@/app/lib/auth'
-import { LoginButton } from '@/components/auth/login-button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { BookOpen, BrainCircuit, LineChart } from 'lucide-react'
+import { getServerSession } from 'next-auth/next';
+import { redirect } from 'next/navigation';
+
+import { authOptions } from '@/app/lib/auth';
+import { BookOpen, BrainCircuit, LineChart } from 'lucide-react';
+
+import { LoginButton } from '@/components/auth/login-button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 
 export default async function SignInPage() {
-  const session = await getServerSession(authOptions)
-  
+  const session = await getServerSession(authOptions);
+
   if (session) {
-    redirect('/dashboard')
+    redirect('/dashboard');
   }
 
   return (
@@ -35,7 +43,8 @@ export default async function SignInPage() {
         <div className="relative z-20 mt-auto">
           <blockquote className="space-y-2">
             <p className="text-lg">
-              "Master your learning journey with spaced repetition and active recall techniques."
+              "Master your learning journey with spaced repetition and active
+              recall techniques."
             </p>
             <footer className="text-sm">42 Network</footer>
           </blockquote>
@@ -47,7 +56,9 @@ export default async function SignInPage() {
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
           <Card>
             <CardHeader>
-              <CardTitle className="text-2xl text-center">Welcome to 42Recall</CardTitle>
+              <CardTitle className="text-2xl text-center">
+                Welcome to 42Recall
+              </CardTitle>
               <CardDescription className="text-center">
                 Sign in with your 42 account to get started
               </CardDescription>
@@ -85,5 +96,5 @@ export default async function SignInPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

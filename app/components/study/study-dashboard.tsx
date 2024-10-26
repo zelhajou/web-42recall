@@ -1,17 +1,21 @@
 'use client';
+
 import { useRouter } from 'next/navigation';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+
 import {
-  BookOpen,
-  Clock,
   Award,
-  Calendar,
   BarChart2,
-  PlayCircle,
+  BookOpen,
+  Calendar,
   ChevronRight,
+  Clock,
+  PlayCircle,
 } from 'lucide-react';
+
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
+
 interface StudyDashboardProps {
   data: {
     decks: any[];
@@ -126,7 +130,9 @@ export function StudyDashboard({ data }: StudyDashboardProps) {
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => router.push(`/dashboard/decks/${deck.id}/study`)}
+                    onClick={() =>
+                      router.push(`/dashboard/decks/${deck.id}/study`)
+                    }
                   >
                     <PlayCircle className="h-4 w-4 mr-2" />
                     Study Now
@@ -161,7 +167,9 @@ export function StudyDashboard({ data }: StudyDashboardProps) {
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => router.push(`/dashboard/decks/${session.deckId}/study`)}
+                  onClick={() =>
+                    router.push(`/dashboard/decks/${session.deckId}/study`)
+                  }
                 >
                   <ChevronRight className="h-4 w-4" />
                 </Button>

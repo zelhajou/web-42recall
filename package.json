@@ -7,7 +7,12 @@
     "build": "prisma generate && next build",
     "start": "next start",
     "postinstall": "prisma generate",
-    "lint": "next lint"
+    "lint": "next lint",
+    "remove-comments": "node scripts/remove-comments.js",
+    "format": "node scripts/format.js",
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,css,md,json}\" --ignore-path .gitignore",
+    "lint-format": "npm run format && npm run lint"
+
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.7.2",
@@ -40,12 +45,15 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
     "eslint": "^9.13.0",
     "postcss": "^8",
+    "prettier": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.8",
     "prisma": "^5.21.1",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"

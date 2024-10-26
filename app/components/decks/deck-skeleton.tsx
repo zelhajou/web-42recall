@@ -1,4 +1,5 @@
-import { Card } from "@/components/ui/card";
+import { Card } from '@/components/ui/card';
+
 export function DeckSkeleton() {
   return (
     <Card className="h-full p-6">

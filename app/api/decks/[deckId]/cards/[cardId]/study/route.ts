@@ -1,7 +1,9 @@
-import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
-import { prisma } from '@/app/lib/prisma';
+import { NextResponse } from 'next/server';
+
 import { authOptions } from '@/app/lib/auth';
+import { prisma } from '@/app/lib/prisma';
+
 export async function POST(
   req: Request,
   { params }: { params: { deckId: string; cardId: string } }
@@ -22,7 +24,7 @@ export async function POST(
       update: {
         lastReviewed: new Date(),
         repetitions: { increment: 1 },
-        nextReview: new Date(), 
+        nextReview: new Date(),
       },
       create: {
         userId: session.user.id,
@@ -34,6 +36,9 @@ export async function POST(
     return NextResponse.json({ data: progress });
   } catch (error) {
     console.error('Error recording study progress:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Internal Server Error' },
+      { status: 500 }
+    );
   }
 }

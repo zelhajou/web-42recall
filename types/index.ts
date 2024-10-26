@@ -1,12 +1,13 @@
-import { Prisma } from '@prisma/client'
-declare module "next-auth" {
+import { Prisma } from '@prisma/client';
+
+declare module 'next-auth' {
   interface Session {
     user: {
       id: string;
       name?: string | null;
       email?: string | null;
       image?: string | null;
-    }
+    };
   }
 }
 export type DeckWithCards = Prisma.DeckGetPayload<{
@@ -18,15 +19,15 @@ export type DeckWithCards = Prisma.DeckGetPayload<{
         id: true;
         name: true;
         image: true;
-      }
-    }
-  }
-}>
+      };
+    };
+  };
+}>;
 export type CardWithProgress = Prisma.CardGetPayload<{
   include: {
     progress: true;
-  }
-}>
+  };
+}>;
 export interface StudySessionData {
   deckId: string;
   startTime: Date;

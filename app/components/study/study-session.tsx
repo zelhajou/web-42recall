@@ -1,21 +1,27 @@
 'use client';
-import { useState, useEffect } from 'react';
+
+import { useEffect, useState } from 'react';
+
 import { useRouter } from 'next/navigation';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
+
 import {
   ChevronLeft,
   ChevronRight,
-  RotateCcw,
-  ThumbsUp,
-  ThumbsDown,
-  Lightbulb,
   Code,
   Eye,
+  Lightbulb,
+  RotateCcw,
+  ThumbsDown,
+  ThumbsUp,
 } from 'lucide-react';
+
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
 import { useToast } from '@/components/ui/use-toast';
+
 import type { Deck } from '@/types/deck';
+
 interface StudySessionProps {
   deck: Deck;
 }
@@ -41,14 +47,14 @@ export function StudySession({ deck }: StudySessionProps) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ isCorrect }),
       });
-      setSessionStats(prev => ({
+      setSessionStats((prev) => ({
         ...prev,
         correct: prev.correct + (isCorrect ? 1 : 0),
         incorrect: prev.incorrect + (isCorrect ? 0 : 1),
         cardsStudied: new Set(prev.cardsStudied).add(currentCard.id),
       }));
       if (currentIndex < deck.cards.length - 1) {
-        setCurrentIndex(prev => prev + 1);
+        setCurrentIndex((prev) => prev + 1);
         setShowAnswer(false);
         setShowHint(false);
         setShowCode(false);
@@ -127,7 +133,9 @@ export function StudySession({ deck }: StudySessionProps) {
               )}
               {showHint && currentCard.hint && (
                 <div className="p-4 bg-muted rounded-lg">
-                  <p className="text-sm text-muted-foreground">{currentCard.hint}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {currentCard.hint}
+                  </p>
                 </div>
               )}
             </div>
@@ -164,10 +172,7 @@ export function StudySession({ deck }: StudySessionProps) {
                     <ThumbsDown className="h-4 w-4 mr-2" />
                     Incorrect
                   </Button>
-                  <Button
-                    onClick={() => handleResponse(true)}
-                    className="w-32"
-                  >
+                  <Button onClick={() => handleResponse(true)} className="w-32">
                     <ThumbsUp className="h-4 w-4 mr-2" />
                     Correct
                   </Button>
@@ -176,10 +181,7 @@ export function StudySession({ deck }: StudySessionProps) {
             )}
             {!showAnswer && (
               <div className="flex justify-center pt-4">
-                <Button
-                  onClick={() => setShowAnswer(true)}
-                  className="w-48"
-                >
+                <Button onClick={() => setShowAnswer(true)} className="w-48">
                   <Eye className="h-4 w-4 mr-2" />
                   Show Answer
                 </Button>

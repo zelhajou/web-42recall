@@ -1,4 +1,5 @@
-import { Deck, Card, User, Tag } from '@/types/deck';
+import { Card, Deck, Tag, User } from '@/types/deck';
+
 export function transformPrismaDeckToApp(prismaDeck: any): Deck {
   return {
     id: prismaDeck.id,
@@ -28,7 +29,7 @@ export function transformPrismaDeckToApp(prismaDeck: any): Deck {
     createdAt: prismaDeck.createdAt.toISOString(),
     updatedAt: prismaDeck.updatedAt.toISOString(),
     _count: {
-      cards: prismaDeck._count.cards
-    }
+      cards: prismaDeck._count.cards,
+    },
   };
 }

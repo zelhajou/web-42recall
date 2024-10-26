@@ -1,11 +1,14 @@
-'use client'
-import { useSession } from "next-auth/react"
-import { Button } from "../ui/button"
-import { signIn, signOut } from "next-auth/react"
+'use client';
+
+import { useSession } from 'next-auth/react';
+import { signIn, signOut } from 'next-auth/react';
+
+import { Button } from '../ui/button';
+
 export function AuthComponent() {
-  const { data: session, status } = useSession()
-  if (status === "loading") {
-    return <div>Loading...</div>
+  const { data: session, status } = useSession();
+  if (status === 'loading') {
+    return <div>Loading...</div>;
   }
   if (session) {
     return (
@@ -15,11 +18,7 @@ export function AuthComponent() {
           Sign out
         </Button>
       </div>
-    )
+    );
   }
-  return (
-    <Button onClick={() => signIn('42-school')}>
-      Sign in with 42
-    </Button>
-  )
+  return <Button onClick={() => signIn('42-school')}>Sign in with 42</Button>;
 }

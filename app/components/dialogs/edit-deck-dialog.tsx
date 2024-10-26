@@ -1,6 +1,12 @@
 'use client';
+
 import { useState } from 'react';
+
 import { useRouter } from 'next/navigation';
+
+import { Loader2 } from 'lucide-react';
+
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -8,20 +14,20 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Switch } from '@/components/ui/switch';
-import { 
-  Select, 
-  SelectContent, 
-  SelectItem, 
-  SelectTrigger, 
-  SelectValue 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from '@/components/ui/select';
-import { Loader2 } from 'lucide-react';
+import { Switch } from '@/components/ui/switch';
+import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/components/ui/use-toast';
-import type { Deck } from '@/types/deck';  
+
+import type { Deck } from '@/types/deck';
+
 const COMMON_42_PROJECTS = [
   'Libft',
   'ft_printf',
@@ -37,7 +43,7 @@ const COMMON_42_PROJECTS = [
   'CPP Modules',
   'inception',
   'ft_irc',
-  'ft_transcendence'
+  'ft_transcendence',
 ] as const;
 const TOPICS = [
   'C Functions',
@@ -51,7 +57,7 @@ const TOPICS = [
   'Docker',
   'Git Commands',
   'Project Tips',
-  'Common Errors'
+  'Common Errors',
 ] as const;
 interface EditDeckDialogProps {
   open: boolean;
@@ -59,11 +65,11 @@ interface EditDeckDialogProps {
   deck: Deck;
   onUpdate: (updates: Partial<Deck>) => Promise<void>;
 }
-export function EditDeckDialog({ 
-  open, 
-  onOpenChange, 
+export function EditDeckDialog({
+  open,
+  onOpenChange,
   deck,
-  onUpdate 
+  onUpdate,
 }: EditDeckDialogProps) {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
@@ -95,7 +101,8 @@ export function EditDeckDialog({
       toast({
         variant: 'destructive',
         title: 'Error',
-        description: error instanceof Error ? error.message : 'Failed to update deck',
+        description:
+          error instanceof Error ? error.message : 'Failed to update deck',
       });
     } finally {
       setIsLoading(false);
@@ -106,20 +113,22 @@ export function EditDeckDialog({
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Edit Deck</DialogTitle>
-          <DialogDescription>
-            Update your deck's information.
-          </DialogDescription>
+          <DialogDescription>Update your deck's information.</DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <Input
             placeholder="Deck Title"
             value={formData.title}
-            onChange={e => setFormData(prev => ({ ...prev, title: e.target.value }))}
+            onChange={(e) =>
+              setFormData((prev) => ({ ...prev, title: e.target.value }))
+            }
             required
           />
           <Select
             value={formData.project}
-            onValueChange={(value) => setFormData(prev => ({ ...prev, project: value }))}
+            onValueChange={(value) =>
+              setFormData((prev) => ({ ...prev, project: value }))
+            }
           >
             <SelectTrigger>
               <SelectValue placeholder="Select Project" />
@@ -135,7 +144,9 @@ export function EditDeckDialog({
           </Select>
           <Select
             value={formData.topic}
-            onValueChange={(value) => setFormData(prev => ({ ...prev, topic: value }))}
+            onValueChange={(value) =>
+              setFormData((prev) => ({ ...prev, topic: value }))
+            }
           >
             <SelectTrigger>
               <SelectValue placeholder="Select Topic" />
@@ -152,12 +163,16 @@ export function EditDeckDialog({
           <Textarea
             placeholder="Deck Description"
             value={formData.description}
-            onChange={e => setFormData(prev => ({ ...prev, description: e.target.value }))}
+            onChange={(e) =>
+              setFormData((prev) => ({ ...prev, description: e.target.value }))
+            }
           />
           <div className="flex items-center space-x-2">
             <Switch
               checked={formData.isPublic}
-              onCheckedChange={checked => setFormData(prev => ({ ...prev, isPublic: checked }))}
+              onCheckedChange={(checked) =>
+                setFormData((prev) => ({ ...prev, isPublic: checked }))
+              }
             />
             <label>Make deck public</label>
           </div>

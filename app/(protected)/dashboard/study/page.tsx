@@ -1,7 +1,10 @@
 import { getServerSession } from 'next-auth/next';
-import { prisma } from '@/app/lib/prisma';
+
 import { authOptions } from '@/app/lib/auth';
+import { prisma } from '@/app/lib/prisma';
+
 import { StudyDashboard } from '@/components/study/study-dashboard';
+
 async function getStudyData(userId: string) {
   const [decks, recentSessions] = await Promise.all([
     prisma.deck.findMany({
@@ -10,15 +13,15 @@ async function getStudyData(userId: string) {
         cards: {
           include: {
             progress: {
-              where: { userId }
-            }
-          }
+              where: { userId },
+            },
+          },
         },
         _count: {
-          select: { cards: true }
-        }
+          select: { cards: true },
+        },
       },
-      orderBy: { updatedAt: 'desc' }
+      orderBy: { updatedAt: 'desc' },
     }),
     prisma.studySession.findMany({
       where: { userId },
@@ -27,18 +30,18 @@ async function getStudyData(userId: string) {
           select: {
             title: true,
             project: true,
-            topic: true
-          }
-        }
+            topic: true,
+          },
+        },
       },
       orderBy: { startTime: 'desc' },
-      take: 5
-    })
+      take: 5,
+    }),
   ]);
   const stats = await prisma.studySession.aggregate({
     where: { userId },
     _count: { _all: true },
-    _sum: { cardsStudied: true }
+    _sum: { cardsStudied: true },
   });
   const transformedData = {
     decks,
@@ -46,9 +49,9 @@ async function getStudyData(userId: string) {
     stats: {
       _count: stats._count,
       _sum: {
-        cardsStudied: stats._sum.cardsStudied ?? 0
-      }
-    }
+        cardsStudied: stats._sum.cardsStudied ?? 0,
+      },
+    },
   };
   return transformedData;
 }

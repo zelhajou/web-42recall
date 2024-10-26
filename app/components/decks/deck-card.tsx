@@ -1,11 +1,15 @@
 'use client';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Book, Clock, Code2, ArrowRight } from 'lucide-react';
+
 import Link from 'next/link';
+
 import { Deck } from '@prisma/client';
+import { ArrowRight, Book, Clock, Code2 } from 'lucide-react';
+
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+
 interface DeckCardProps {
-  deck: any; 
+  deck: any;
 }
 export function DeckCard({ deck }: DeckCardProps) {
   return (
@@ -43,7 +47,7 @@ export function DeckCard({ deck }: DeckCardProps) {
         {deck.tags.length > 0 && (
           <div className="flex flex-wrap gap-1">
             {deck.tags.map((tag: any) => (
-              <span 
+              <span
                 key={tag.id}
                 className="px-2 py-1 text-xs bg-muted rounded-full"
               >

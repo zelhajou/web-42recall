@@ -1,4 +1,5 @@
 'use client';
+
 import {
   DndContext,
   DragEndEvent,
@@ -15,17 +16,21 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { Card, CardContent } from '@/components/ui/card';
+import { GripVertical, MoreVertical } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
-import { MoreVertical, GripVertical } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+
 import { Card as CardType } from '@/types/deck';
+
 import { CardSkeleton } from './card-skeleton';
+
 interface SortableCardProps {
   card: CardType;
   index: number;
@@ -98,7 +103,9 @@ function SortableCard({
           {card.hint && (
             <div className="space-y-1">
               <p className="font-medium">Hint</p>
-              <p className="text-sm text-muted-foreground italic">{card.hint}</p>
+              <p className="text-sm text-muted-foreground italic">
+                {card.hint}
+              </p>
             </div>
           )}
           {card.code && (

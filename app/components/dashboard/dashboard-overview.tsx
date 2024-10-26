@@ -1,30 +1,32 @@
 'use client';
+
 import Link from 'next/link';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
+import { ArrowRight, BarChart2, BookOpen, Clock, Plus } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
-import {
-  BookOpen,
-  Plus,
-  BarChart2,
-  Clock,
-  ArrowRight,
-} from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
 interface DashboardOverviewProps {
-  data: any; 
+  data: any;
 }
 export function DashboardOverview({ data }: DashboardOverviewProps) {
-  const totalCards = data.decks.reduce((sum: number, deck: any) => 
-    sum + deck._count.cards, 0
+  const totalCards = data.decks.reduce(
+    (sum: number, deck: any) => sum + deck._count.cards,
+    0
   );
-  const totalStudySessions = data.decks.reduce((sum: number, deck: any) => 
-    sum + deck._count.studySessions, 0
+  const totalStudySessions = data.decks.reduce(
+    (sum: number, deck: any) => sum + deck._count.studySessions,
+    0
   );
   return (
     <div className="space-y-8">
       {}
       <div className="flex justify-between items-start">
         <div>
-          <h1 className="text-3xl font-bold">Welcome back, {data.name || 'Student'}!</h1>
+          <h1 className="text-3xl font-bold">
+            Welcome back, {data.name || 'Student'}!
+          </h1>
           <p className="text-muted-foreground mt-2">
             Here's an overview of your learning progress
           </p>
@@ -52,14 +54,14 @@ export function DashboardOverview({ data }: DashboardOverviewProps) {
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Study Sessions</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Study Sessions
+            </CardTitle>
             <BarChart2 className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{totalStudySessions}</div>
-            <p className="text-xs text-muted-foreground">
-              Across all decks
-            </p>
+            <p className="text-xs text-muted-foreground">Across all decks</p>
           </CardContent>
         </Card>
         <Card>
@@ -70,11 +72,12 @@ export function DashboardOverview({ data }: DashboardOverviewProps) {
           <CardContent>
             <div className="text-2xl font-bold">
               {data.decks.some((deck: any) => deck.studySessions.length > 0)
-                ? new Date(data.decks.find((deck: any) => 
-                    deck.studySessions.length > 0
-                  ).studySessions[0].startTime).toLocaleDateString()
-                : 'No sessions yet'
-              }
+                ? new Date(
+                    data.decks.find(
+                      (deck: any) => deck.studySessions.length > 0
+                    ).studySessions[0].startTime
+                  ).toLocaleDateString()
+                : 'No sessions yet'}
             </div>
           </CardContent>
         </Card>
@@ -92,8 +95,8 @@ export function DashboardOverview({ data }: DashboardOverviewProps) {
         </div>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {data.decks.map((deck: any) => (
-            <Link 
-              key={deck.id} 
+            <Link
+              key={deck.id}
               href={`/dashboard/decks/${deck.id}`}
               className="block group"
             >

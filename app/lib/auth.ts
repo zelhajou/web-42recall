@@ -1,6 +1,8 @@
-import type { NextAuthOptions } from "next-auth"
-import FortyTwoProvider from "next-auth/providers/42-school"
-import { CustomPrismaAdapter } from "./custom-prisma-adapter"
+import type { NextAuthOptions } from 'next-auth';
+import FortyTwoProvider from 'next-auth/providers/42-school';
+
+import { CustomPrismaAdapter } from './custom-prisma-adapter';
+
 export const authOptions: NextAuthOptions = {
   adapter: CustomPrismaAdapter(),
   providers: [
@@ -12,8 +14,8 @@ export const authOptions: NextAuthOptions = {
           id: profile.id.toString(),
           name: profile.login || profile.name,
           email: profile.email,
-          image: profile.image?.versions?.small || profile.image?.link
-        }
+          image: profile.image?.versions?.small || profile.image?.link,
+        };
       },
     }),
   ],
@@ -32,12 +34,12 @@ export const authOptions: NextAuthOptions = {
     },
     async redirect({ url, baseUrl }) {
       if (url.startsWith('/')) {
-        return `${baseUrl}${url}`
+        return `${baseUrl}${url}`;
       }
       if (new URL(url).origin === baseUrl) {
-        return url
+        return url;
       }
-      return baseUrl
+      return baseUrl;
     },
   },
   pages: {
@@ -45,8 +47,8 @@ export const authOptions: NextAuthOptions = {
     error: '/auth/error',
   },
   session: {
-    strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60, 
+    strategy: 'jwt',
+    maxAge: 30 * 24 * 60 * 60,
   },
   debug: process.env.NODE_ENV === 'development',
-}
+};

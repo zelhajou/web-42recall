@@ -1,65 +1,70 @@
-"use client";
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Switch } from "@/components/ui/switch";
+'use client';
+
+import React, { useState } from 'react';
+
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+
 import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@/components/ui/select";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Badge } from "@/components/ui/badge";
-import {
-  Loader2,
-  Plus,
-  X,
+  Book,
+  Code2,
   Eye,
   EyeOff,
-  Code2,
-  Book,
-  Users,
-  Tags,
   ListPlus,
-} from "lucide-react";
-import { toast } from "@/components/ui/use-toast";
-import { ChevronLeft } from "lucide-react";
-import Link from 'next/link';
+  Loader2,
+  Plus,
+  Tags,
+  Users,
+  X,
+} from 'lucide-react';
+import { ChevronLeft } from 'lucide-react';
+
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Switch } from '@/components/ui/switch';
+import { Textarea } from '@/components/ui/textarea';
+import { toast } from '@/components/ui/use-toast';
+
 const COMMON_42_PROJECTS = [
-  "Libft",
-  "ft_printf",
-  "get_next_line",
-  "Born2beroot",
-  "FdF",
-  "minitalk",
-  "push_swap",
-  "minishell",
-  "philosophers",
-  "NetPractice",
-  "cub3d/miniRT",
-  "CPP Modules",
-  "inception",
-  "ft_irc",
-  "ft_transcendence",
+  'Libft',
+  'ft_printf',
+  'get_next_line',
+  'Born2beroot',
+  'FdF',
+  'minitalk',
+  'push_swap',
+  'minishell',
+  'philosophers',
+  'NetPractice',
+  'cub3d/miniRT',
+  'CPP Modules',
+  'inception',
+  'ft_irc',
+  'ft_transcendence',
 ] as const;
 const TOPICS = [
-  "C Functions",
-  "System Calls",
-  "Data Structures",
-  "Algorithms",
-  "Shell Commands",
-  "Networking",
-  "Memory Management",
-  "Process Management",
-  "Docker",
-  "Git Commands",
-  "Project Tips",
-  "Common Errors",
+  'C Functions',
+  'System Calls',
+  'Data Structures',
+  'Algorithms',
+  'Shell Commands',
+  'Networking',
+  'Memory Management',
+  'Process Management',
+  'Docker',
+  'Git Commands',
+  'Project Tips',
+  'Common Errors',
 ] as const;
 interface Card {
   front: string;
@@ -72,18 +77,18 @@ export function FortyTwoDeckForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
   const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    project: "",
-    topic: "",
+    title: '',
+    description: '',
+    project: '',
+    topic: '',
     isPublic: true,
     cards: [] as Card[],
   });
   const [currentCard, setCurrentCard] = useState<Card>({
-    front: "",
-    back: "",
-    hint: "",
-    code: "",
+    front: '',
+    back: '',
+    hint: '',
+    code: '',
   });
   const addCard = () => {
     if (currentCard.front && currentCard.back) {
@@ -91,7 +96,7 @@ export function FortyTwoDeckForm() {
         ...prev,
         cards: [...prev.cards, currentCard],
       }));
-      setCurrentCard({ front: "", back: "", hint: "", code: "" });
+      setCurrentCard({ front: '', back: '', hint: '', code: '' });
     }
   };
   const removeCard = (index: number) => {
@@ -105,11 +110,11 @@ export function FortyTwoDeckForm() {
     setIsLoading(true);
     try {
       if (formData.cards.length === 0) {
-        throw new Error("Add at least one card to create a deck");
+        throw new Error('Add at least one card to create a deck');
       }
-      const response = await fetch("/api/decks", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/decks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           title: formData.title.trim(),
           description: formData.description.trim(),
@@ -126,22 +131,22 @@ export function FortyTwoDeckForm() {
       });
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to create deck");
+        throw new Error(errorData.error || 'Failed to create deck');
       }
       const { data } = await response.json();
       toast({
-        title: "Success",
-        description: "Deck created successfully!",
+        title: 'Success',
+        description: 'Deck created successfully!',
       });
       router.push(`/dashboard/decks/${data.id}`);
       router.refresh();
     } catch (error) {
-      console.error("Error creating deck:", error);
+      console.error('Error creating deck:', error);
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description:
-          error instanceof Error ? error.message : "Failed to create deck",
+          error instanceof Error ? error.message : 'Failed to create deck',
       });
     } finally {
       setIsLoading(false);
@@ -178,7 +183,7 @@ export function FortyTwoDeckForm() {
             <div className="space-y-4">
               <div className="flex flex-col space-y-2">
                 <h2 className="text-2xl font-bold">
-                  {formData.title || "Untitled Deck"}
+                  {formData.title || 'Untitled Deck'}
                 </h2>
                 {formData.description && (
                   <p className="text-muted-foreground">
@@ -206,7 +211,7 @@ export function FortyTwoDeckForm() {
                 )}
                 <div className="flex items-center gap-1">
                   <Users className="w-4 h-4" />
-                  {formData.isPublic ? "Public" : "Private"}
+                  {formData.isPublic ? 'Public' : 'Private'}
                 </div>
               </div>
               {}
@@ -378,7 +383,7 @@ export function FortyTwoDeckForm() {
             />
             <Input
               placeholder="Hint (e.g., Think about null pointer)"
-              value={currentCard.hint || ""}
+              value={currentCard.hint || ''}
               onChange={(e) =>
                 setCurrentCard((prev) => ({ ...prev, hint: e.target.value }))
               }
@@ -386,7 +391,7 @@ export function FortyTwoDeckForm() {
             <Textarea
               placeholder="Code Example (optional)"
               className="font-mono text-sm"
-              value={currentCard.code || ""}
+              value={currentCard.code || ''}
               onChange={(e) =>
                 setCurrentCard((prev) => ({ ...prev, code: e.target.value }))
               }
@@ -417,7 +422,7 @@ export function FortyTwoDeckForm() {
                 ) : (
                   <Eye className="w-4 h-4 mr-2" />
                 )}
-                {showPreview ? "Hide Preview" : "Show Preview"}
+                {showPreview ? 'Hide Preview' : 'Show Preview'}
               </Button>
             </div>
             <div className="space-y-2">
@@ -465,7 +470,7 @@ export function FortyTwoDeckForm() {
                 Creating...
               </>
             ) : (
-              "Create Deck"
+              'Create Deck'
             )}
           </Button>
         </div>
@@ -473,8 +478,8 @@ export function FortyTwoDeckForm() {
       {formData.cards.length === 0 && (
         <Alert>
           <AlertDescription>
-            Start by adding cards about{" "}
-            {formData.project || "your chosen project"}. Include code examples
+            Start by adding cards about{' '}
+            {formData.project || 'your chosen project'}. Include code examples
             and common pitfalls to help fellow 42 students!
           </AlertDescription>
         </Alert>

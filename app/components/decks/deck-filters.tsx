@@ -1,13 +1,16 @@
 'use client';
+
 import { Input } from '@/components/ui/input';
-import { 
-  Select, 
-  SelectTrigger, 
-  SelectValue, 
-  SelectContent, 
-  SelectItem 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from '@/components/ui/select';
+
 import type { DeckFilters } from '@/types/deck';
+
 const COMMON_42_PROJECTS = [
   'Libft',
   'ft_printf',
@@ -23,7 +26,7 @@ const COMMON_42_PROJECTS = [
   'CPP Modules',
   'inception',
   'ft_irc',
-  'ft_transcendence'
+  'ft_transcendence',
 ] as const;
 const TOPICS = [
   'C Functions',
@@ -37,7 +40,7 @@ const TOPICS = [
   'Docker',
   'Git Commands',
   'Project Tips',
-  'Common Errors'
+  'Common Errors',
 ] as const;
 const SORT_OPTIONS = [
   { label: 'Recently Updated', value: 'updated' },
@@ -52,15 +55,17 @@ interface DeckFiltersProps {
 export function DeckFilters({ filters, onChange }: DeckFiltersProps) {
   return (
     <div className="flex flex-col sm:flex-row gap-2">
-      <Input 
+      <Input
         placeholder="Search decks..."
         className="max-w-xs"
         value={filters.search}
         onChange={(e) => onChange({ ...filters, search: e.target.value })}
       />
-      <Select 
-        value={filters.project || 'all'} 
-        onValueChange={(value) => onChange({ ...filters, project: value === 'all' ? null : value })}
+      <Select
+        value={filters.project || 'all'}
+        onValueChange={(value) =>
+          onChange({ ...filters, project: value === 'all' ? null : value })
+        }
       >
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Project" />
@@ -74,9 +79,11 @@ export function DeckFilters({ filters, onChange }: DeckFiltersProps) {
           ))}
         </SelectContent>
       </Select>
-      <Select 
-        value={filters.topic || 'all'} 
-        onValueChange={(value) => onChange({ ...filters, topic: value === 'all' ? null : value })}
+      <Select
+        value={filters.topic || 'all'}
+        onValueChange={(value) =>
+          onChange({ ...filters, topic: value === 'all' ? null : value })
+        }
       >
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Topic" />
@@ -90,8 +97,8 @@ export function DeckFilters({ filters, onChange }: DeckFiltersProps) {
           ))}
         </SelectContent>
       </Select>
-      <Select 
-        value={filters.sortBy} 
+      <Select
+        value={filters.sortBy}
         onValueChange={(value: any) => onChange({ ...filters, sortBy: value })}
       >
         <SelectTrigger className="w-[180px]">

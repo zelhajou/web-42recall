@@ -26,9 +26,14 @@
       "@/contexts/*": ["./app/contexts/*"],
       "@/hooks/*": ["./hooks/*"],
       "@/types/*": ["./types/*"]
-
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "next.config.mjs"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "next.config.mjs"
+  ],
   "exclude": ["node_modules"]
 }

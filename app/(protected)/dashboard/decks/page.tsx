@@ -1,19 +1,25 @@
 'use client';
+
 import { useEffect, useState } from 'react';
-import { useSearchParams, usePathname, useRouter } from 'next/navigation';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+
+import Link from 'next/link';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+
+import { PlusCircle } from 'lucide-react';
+
 import { DeckCard } from '@/components/decks/deck-card';
 import { DeckFilters } from '@/components/decks/deck-filters';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 import { Pagination } from '@/components/ui/pagination';
-import { PlusCircle } from 'lucide-react';
-import Link from 'next/link';
+
 import { DeckFilters as DeckFiltersType, PaginationState } from '@/types/deck';
+
 const DEFAULT_FILTERS: DeckFiltersType = {
   search: '',
   project: null,
   topic: null,
-  sortBy: 'updated'
+  sortBy: 'updated',
 };
 export default function DecksPage() {
   const router = useRouter();
@@ -26,16 +32,17 @@ export default function DecksPage() {
     page: 1,
     limit: 12,
     total: 0,
-    pages: 0
+    pages: 0,
   });
   useEffect(() => {
     const page = Number(searchParams.get('page')) || 1;
     const search = searchParams.get('search') || '';
     const project = searchParams.get('project');
     const topic = searchParams.get('topic');
-    const sortBy = (searchParams.get('sort') as DeckFiltersType['sortBy']) || 'updated';
+    const sortBy =
+      (searchParams.get('sort') as DeckFiltersType['sortBy']) || 'updated';
     setFilters({ search, project, topic, sortBy });
-    setPagination(prev => ({ ...prev, page }));
+    setPagination((prev) => ({ ...prev, page }));
   }, [searchParams]);
   useEffect(() => {
     const fetchDecks = async () => {
@@ -47,7 +54,7 @@ export default function DecksPage() {
           ...(filters.search && { search: filters.search }),
           ...(filters.project && { project: filters.project }),
           ...(filters.topic && { topic: filters.topic }),
-          sort: filters.sortBy
+          sort: filters.sortBy,
         });
         const response = await fetch(`/api/decks?${queryParams}`);
         const data = await response.json();
@@ -131,8 +138,8 @@ export default function DecksPage() {
         <>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {decks.map((deck) => (
-              <Link 
-                key={deck.id} 
+              <Link
+                key={deck.id}
                 href={`/dashboard/decks/${deck.id}`}
                 className="group"
               >
@@ -140,10 +147,7 @@ export default function DecksPage() {
               </Link>
             ))}
           </div>
-          <Pagination 
-            pagination={pagination}
-            onChange={handlePageChange}
-          />
+          <Pagination pagination={pagination} onChange={handlePageChange} />
         </>
       )}
     </div>

@@ -1,8 +1,12 @@
 import { notFound } from 'next/navigation';
+
 import { prisma } from '@/app/lib/prisma';
-import { StudySession } from '@/components/study/study-session';
-import { Deck } from '@/types/deck';
 import { transformPrismaDeckToApp } from '@/app/lib/transformers';
+
+import { StudySession } from '@/components/study/study-session';
+
+import { Deck } from '@/types/deck';
+
 interface StudyPageProps {
   params: {
     deckId: string;
@@ -14,23 +18,23 @@ async function getDeck(deckId: string): Promise<Deck> {
     include: {
       cards: {
         orderBy: {
-          order: 'asc'
-        }
+          order: 'asc',
+        },
       },
       user: {
         select: {
           id: true,
           name: true,
           image: true,
-        }
+        },
       },
       tags: true,
       _count: {
-        select: { 
-          cards: true 
-        }
-      }
-    }
+        select: {
+          cards: true,
+        },
+      },
+    },
   });
   if (!prismaData) {
     notFound();

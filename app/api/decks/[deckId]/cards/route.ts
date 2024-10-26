@@ -1,8 +1,10 @@
-import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
-import { prisma } from '@/app/lib/prisma';
+import { NextResponse } from 'next/server';
+
 import { authOptions } from '@/app/lib/auth';
+import { prisma } from '@/app/lib/prisma';
 import { z } from 'zod';
+
 const cardSchema = z.object({
   front: z.string().min(1),
   back: z.string().min(1),
@@ -10,7 +12,7 @@ const cardSchema = z.object({
   code: z.string().optional(),
 });
 const createCardsSchema = z.object({
-  cards: z.array(cardSchema)
+  cards: z.array(cardSchema),
 });
 export async function POST(
   req: Request,
@@ -25,7 +27,7 @@ export async function POST(
     const body = createCardsSchema.parse(json);
     const deck = await prisma.deck.findUnique({
       where: { id: params.deckId },
-      select: { userId: true, _count: { select: { cards: true } } }
+      select: { userId: true, _count: { select: { cards: true } } },
     });
     if (!deck) {
       return NextResponse.json({ error: 'Deck not found' }, { status: 404 });
@@ -41,7 +43,7 @@ export async function POST(
             ...card,
             order: lastOrder + index,
             deckId: params.deckId,
-          }
+          },
         })
       )
     );
@@ -51,6 +53,9 @@ export async function POST(
       return NextResponse.json({ error: error.errors }, { status: 400 });
     }
     console.error('Error creating cards:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Internal Server Error' },
+      { status: 500 }
+    );
   }
 }

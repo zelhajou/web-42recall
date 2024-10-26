@@ -1,8 +1,10 @@
-import { type ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { type ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
 import { Deck } from '@/types/deck';
+
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 export function convertPrismaDatesToStrings<T>(obj: T): T {
   if (obj === null || obj === undefined) {
@@ -52,7 +54,7 @@ export function transformPrismaDeckToApp(prismaDeck: any): Deck {
     createdAt: prismaDeck.createdAt.toISOString(),
     updatedAt: prismaDeck.updatedAt.toISOString(),
     _count: {
-      cards: prismaDeck._count.cards
-    }
+      cards: prismaDeck._count.cards,
+    },
   };
 }

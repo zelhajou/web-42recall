@@ -1,10 +1,12 @@
-import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
-import { prisma } from '@/app/lib/prisma';
+import { NextResponse } from 'next/server';
+
 import { authOptions } from '@/app/lib/auth';
+import { prisma } from '@/app/lib/prisma';
 import { z } from 'zod';
+
 const reorderSchema = z.object({
-  orderedIds: z.array(z.string())
+  orderedIds: z.array(z.string()),
 });
 export async function POST(
   req: Request,
@@ -17,7 +19,7 @@ export async function POST(
     }
     const deck = await prisma.deck.findUnique({
       where: { id: params.deckId },
-      select: { userId: true }
+      select: { userId: true },
     });
     if (!deck || deck.userId !== session.user.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -28,7 +30,7 @@ export async function POST(
       orderedIds.map((id, index) =>
         prisma.card.update({
           where: { id },
-          data: { order: index }
+          data: { order: index },
         })
       )
     );
@@ -38,6 +40,9 @@ export async function POST(
       return NextResponse.json({ error: error.errors }, { status: 400 });
     }
     console.error('Error reordering cards:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Internal Server Error' },
+      { status: 500 }
+    );
   }
 }

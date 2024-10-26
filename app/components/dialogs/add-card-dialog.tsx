@@ -1,5 +1,10 @@
 'use client';
+
 import { useState } from 'react';
+
+import { Loader2, Plus } from 'lucide-react';
+
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -7,13 +12,16 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Loader2, Plus } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
+
 import type { Card } from '@/types/deck';
-type NewCard = Omit<Card, 'id' | 'order' | 'deckId' | 'createdAt' | 'updatedAt'>;
+
+type NewCard = Omit<
+  Card,
+  'id' | 'order' | 'deckId' | 'createdAt' | 'updatedAt'
+>;
 interface AddCardDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -35,19 +43,19 @@ export function AddCardDialog({
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [cards, setCards] = useState<CardFormData[]>([
-    { front: '', back: '', hint: '', code: '' }
+    { front: '', back: '', hint: '', code: '' },
   ]);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     try {
       const validCards: NewCard[] = cards
-        .filter(card => card.front.trim() && card.back.trim())
-        .map(card => ({
+        .filter((card) => card.front.trim() && card.back.trim())
+        .map((card) => ({
           front: card.front.trim(),
           back: card.back.trim(),
           hint: card.hint.trim() || null,
-          code: card.code.trim() || null
+          code: card.code.trim() || null,
         }));
       if (validCards.length === 0) {
         throw new Error('At least one card is required');
@@ -64,7 +72,8 @@ export function AddCardDialog({
       toast({
         variant: 'destructive',
         title: 'Error',
-        description: error instanceof Error ? error.message : 'Failed to add cards',
+        description:
+          error instanceof Error ? error.message : 'Failed to add cards',
       });
     } finally {
       setIsLoading(false);
@@ -73,10 +82,14 @@ export function AddCardDialog({
   const addCard = () => {
     setCards([...cards, { front: '', back: '', hint: '', code: '' }]);
   };
-  const updateCard = (index: number, field: keyof CardFormData, value: string) => {
-    setCards(cards.map((card, i) => 
-      i === index ? { ...card, [field]: value } : card
-    ));
+  const updateCard = (
+    index: number,
+    field: keyof CardFormData,
+    value: string
+  ) => {
+    setCards(
+      cards.map((card, i) => (i === index ? { ...card, [field]: value } : card))
+    );
   };
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -84,7 +97,8 @@ export function AddCardDialog({
         <DialogHeader>
           <DialogTitle>Add Cards</DialogTitle>
           <DialogDescription>
-            Add new cards to your deck. Each card needs a front (question) and back (answer).
+            Add new cards to your deck. Each card needs a front (question) and
+            back (answer).
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="flex flex-col flex-1">

@@ -1,6 +1,9 @@
-import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+
+import { Button } from '@/components/ui/button';
+
 import { PaginationState } from '@/types/deck';
+
 interface PaginationProps {
   pagination: PaginationState;
   onChange: (page: number) => void;

@@ -1,7 +1,9 @@
-import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
-import { prisma } from '@/app/lib/prisma';
+import { NextResponse } from 'next/server';
+
 import { authOptions } from '@/app/lib/auth';
+import { prisma } from '@/app/lib/prisma';
+
 export async function POST(
   req: Request,
   { params }: { params: { deckId: string } }
@@ -11,7 +13,13 @@ export async function POST(
     if (!session?.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-    const { startTime, endTime, cardsStudied, correctAnswers, incorrectAnswers } = await req.json();
+    const {
+      startTime,
+      endTime,
+      cardsStudied,
+      correctAnswers,
+      incorrectAnswers,
+    } = await req.json();
     const studySession = await prisma.studySession.create({
       data: {
         userId: session.user.id,
@@ -24,6 +32,9 @@ export async function POST(
     return NextResponse.json({ data: studySession });
   } catch (error) {
     console.error('Error saving study session:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Internal Server Error' },
+      { status: 500 }
+    );
   }
 }
