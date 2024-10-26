@@ -54,7 +54,9 @@ const COMMON_42_PROJECTS = [
 ] as const;
 const TOPICS = [
   'C Functions',
+  'String Formatting',
   'System Calls',
+  'File manipulation',
   'Data Structures',
   'Algorithms',
   'Shell Commands',
