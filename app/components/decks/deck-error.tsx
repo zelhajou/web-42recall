@@ -20,4 +20,4 @@ export function DeckError({ onRetry }: DeckErrorProps) {
       </AlertDescription>
     </Alert>
   );
-}s
+}

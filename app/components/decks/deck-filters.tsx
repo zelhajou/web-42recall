@@ -9,7 +9,7 @@ import {
   SelectContent, 
   SelectItem 
 } from '@/components/ui/select';
-import { DeckFilters } from '@/types/deck';
+import type { DeckFilters } from '@/types/deck';
 
 const COMMON_42_PROJECTS = [
   'Libft',
@@ -43,6 +43,7 @@ const TOPICS = [
   'Project Tips',
   'Common Errors'
 ] as const;
+
 
 const SORT_OPTIONS = [
   { label: 'Recently Updated', value: 'updated' },

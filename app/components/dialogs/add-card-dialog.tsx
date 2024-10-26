@@ -14,13 +14,22 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Loader2, Plus } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
-import { Card } from '@/types/deck';
+import type { Card } from '@/types/deck';
+
+type NewCard = Omit<Card, 'id' | 'order' | 'deckId' | 'createdAt' | 'updatedAt'>;
 
 interface AddCardDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   deckId: string;
-  onAddCards: (cards: Omit<Card, 'id' | 'deckId' | 'createdAt' | 'updatedAt' | 'order'>[]) => Promise<void>;
+  onAddCards: (cards: NewCard[]) => Promise<void>;
+}
+
+interface CardFormData {
+  front: string;
+  back: string;
+  hint: string;
+  code: string;
 }
 
 export function AddCardDialog({
@@ -29,8 +38,9 @@ export function AddCardDialog({
   deckId,
   onAddCards,
 }: AddCardDialogProps) {
+  const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
-  const [cards, setCards] = useState<Array<{ front: string; back: string; hint?: string; code?: string }>>([
+  const [cards, setCards] = useState<CardFormData[]>([
     { front: '', back: '', hint: '', code: '' }
   ]);
 
@@ -39,7 +49,15 @@ export function AddCardDialog({
     setIsLoading(true);
 
     try {
-      const validCards = cards.filter(card => card.front.trim() && card.back.trim());
+      // Filter and transform cards
+      const validCards: NewCard[] = cards
+        .filter(card => card.front.trim() && card.back.trim())
+        .map(card => ({
+          front: card.front.trim(),
+          back: card.back.trim(),
+          hint: card.hint.trim() || null,
+          code: card.code.trim() || null
+        }));
       
       if (validCards.length === 0) {
         throw new Error('At least one card is required');
@@ -50,19 +68,29 @@ export function AddCardDialog({
       // Reset form
       setCards([{ front: '', back: '', hint: '', code: '' }]);
       onOpenChange(false);
+
+      toast({
+        title: 'Success',
+        description: `Added ${validCards.length} cards successfully.`,
+      });
     } catch (error) {
       console.error('Error adding cards:', error);
+      toast({
+        variant: 'destructive',
+        title: 'Error',
+        description: error instanceof Error ? error.message : 'Failed to add cards',
+      });
     } finally {
       setIsLoading(false);
     }
   };
 
   const addCard = () => {
-    setCards(prev => [...prev, { front: '', back: '', hint: '', code: '' }]);
+    setCards([...cards, { front: '', back: '', hint: '', code: '' }]);
   };
 
-  const updateCard = (index: number, field: keyof Card, value: string) => {
-    setCards(prev => prev.map((card, i) => 
+  const updateCard = (index: number, field: keyof CardFormData, value: string) => {
+    setCards(cards.map((card, i) => 
       i === index ? { ...card, [field]: value } : card
     ));
   };
