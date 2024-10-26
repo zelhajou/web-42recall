@@ -17,6 +17,8 @@ import {
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
+import { ThemeToggle } from '@/components/theme-toggle';
+
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -34,25 +36,21 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const pathname = usePathname();
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       {/* Navigation */}
-      <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200">
+      <nav className="fixed top-0 z-50 w-full bg-background border-b">
         <div className="px-3 py-3 lg:px-5 lg:pl-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-start">
               <Link href="/dashboard" className="flex ml-2 md:mr-24">
-                <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-gray-800">
+                <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap">
                   42Recall
                 </span>
               </Link>
             </div>
-            <div className="flex items-center">
-              <button
-                type="button"
-                className="p-2 text-gray-500 rounded-lg hover:text-gray-700 hover:bg-gray-100"
-              >
-                <BellIcon className="w-6 h-6" />
-              </button>
+            <div className="flex items-center ">
+              <ThemeToggle />
+            
 
               {/* Profile dropdown */}
               <Menu as="div" className="relative ml-3">
@@ -105,7 +103,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
       {/* Sidebar */}
       <aside className="fixed top-[3.75rem] left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0">
-        <div className="h-full px-3 py-4 overflow-y-auto bg-white border-r border-gray-200">
+        <div className="h-full px-3 py-4 overflow-y-auto bg-background text-foreground border-r ">
           <ul className="space-y-2 font-medium">
             {navigation.map((item) => {
               const Icon = item.icon;
