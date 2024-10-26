@@ -2,6 +2,7 @@
 import { notFound } from 'next/navigation';
 import { prisma } from '@/app/lib/prisma';
 import { DeckDetails } from '@/components/decks/deck-details';
+import { Deck } from '@/types/deck';
 
 interface PageProps {
   params: {
@@ -9,7 +10,7 @@ interface PageProps {
   };
 }
 
-async function getDeck(deckId: string) {
+async function getDeck(deckId: string): Promise<Deck> {
   const deck = await prisma.deck.findUnique({
     where: { id: deckId },
     include: {
@@ -36,11 +37,20 @@ async function getDeck(deckId: string) {
     notFound();
   }
 
-  return deck;
+  // Convert dates to strings
+  return {
+    ...deck,
+    createdAt: deck.createdAt.toISOString(),
+    updatedAt: deck.updatedAt.toISOString(),
+    cards: deck.cards.map(card => ({
+      ...card,
+      createdAt: card.createdAt.toISOString(),
+      updatedAt: card.updatedAt.toISOString()
+    }))
+  };
 }
 
 export default async function DeckPage({ params }: PageProps) {
   const deck = await getDeck(params.deckId);
-  
   return <DeckDetails deck={deck} />;
 }

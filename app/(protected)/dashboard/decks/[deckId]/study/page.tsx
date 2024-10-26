@@ -2,6 +2,8 @@
 import { notFound } from 'next/navigation';
 import { prisma } from '@/app/lib/prisma';
 import { StudySession } from '@/components/study/study-session';
+import { Deck } from '@/types/deck';
+import { transformPrismaDeckToApp } from '@/app/lib/transformers';
 
 interface StudyPageProps {
   params: {
@@ -9,8 +11,8 @@ interface StudyPageProps {
   };
 }
 
-async function getDeck(deckId: string) {
-  const deck = await prisma.deck.findUnique({
+async function getDeck(deckId: string): Promise<Deck> {
+  const prismaData = await prisma.deck.findUnique({
     where: { id: deckId },
     include: {
       cards: {
@@ -18,17 +20,27 @@ async function getDeck(deckId: string) {
           order: 'asc'
         }
       },
+      user: {
+        select: {
+          id: true,
+          name: true,
+          image: true,
+        }
+      },
+      tags: true,
       _count: {
-        select: { cards: true }
+        select: { 
+          cards: true 
+        }
       }
     }
   });
 
-  if (!deck) {
+  if (!prismaData) {
     notFound();
   }
 
-  return deck;
+  return transformPrismaDeckToApp(prismaData);
 }
 
 export default async function StudyPage({ params }: StudyPageProps) {

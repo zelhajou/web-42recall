@@ -96,7 +96,11 @@ export default function DecksPage() {
   };
 
   const handlePageChange = (newPage: number) => {
-    const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams();
+    // Copy existing params
+    searchParams.forEach((value, key) => {
+      params.set(key, value);
+    });
     params.set('page', newPage.toString());
     router.push(`${pathname}?${params.toString()}`);
   };

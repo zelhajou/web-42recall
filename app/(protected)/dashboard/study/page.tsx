@@ -4,8 +4,9 @@ import { prisma } from '@/app/lib/prisma';
 import { authOptions } from '@/app/lib/auth';
 import { StudyDashboard } from '@/components/study/study-dashboard';
 
+// app/(protected)/dashboard/study/page.tsx
 async function getStudyData(userId: string) {
-  const [decks, recentSessions, stats] = await Promise.all([
+  const [decks, recentSessions] = await Promise.all([
     // Get decks with study progress
     prisma.deck.findMany({
       where: { userId },
@@ -37,16 +38,29 @@ async function getStudyData(userId: string) {
       },
       orderBy: { startTime: 'desc' },
       take: 5
-    }),
-    // Get overall study stats
-    prisma.studySession.aggregate({
-      where: { userId },
-      _count: { _all: true },
-      _sum: { cardsStudied: true }
     })
   ]);
 
-  return { decks, recentSessions, stats };
+  // Get stats separately
+  const stats = await prisma.studySession.aggregate({
+    where: { userId },
+    _count: { _all: true },
+    _sum: { cardsStudied: true }
+  });
+
+  // Transform the data to ensure cardsStudied is never null
+  const transformedData = {
+    decks,
+    recentSessions,
+    stats: {
+      _count: stats._count,
+      _sum: {
+        cardsStudied: stats._sum.cardsStudied ?? 0
+      }
+    }
+  };
+
+  return transformedData;
 }
 
 export default async function StudyHomePage() {
@@ -54,6 +68,5 @@ export default async function StudyHomePage() {
   if (!session?.user?.id) return null;
 
   const data = await getStudyData(session.user.id);
-
   return <StudyDashboard data={data} />;
 }
