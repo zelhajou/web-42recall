@@ -6,6 +6,8 @@ import { ToastProvider } from '@/components/providers/toast-provider';
 import AuthProvider from './components/providers/auth-provider';
 import './globals.css';
 
+import { Analytics } from "@vercel/analytics/react"
+
 const inter = Inter({ subsets: ['latin'] });
 export const metadata = {
   title: '42Recall',
