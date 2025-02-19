@@ -25,6 +25,7 @@ export default function RootLayout({
           <AuthProvider>{children}</AuthProvider>
           <ToastProvider />
         </ThemeProvider>
+        <Analytics/>
       </body>
     </html>
   );
