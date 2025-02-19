@@ -9,6 +9,11 @@ export const authOptions: NextAuthOptions = {
     FortyTwoProvider({
       clientId: process.env.FORTYTWO_CLIENT_ID!,
       clientSecret: process.env.FORTYTWO_CLIENT_SECRET!,
+      authorization: {
+        params: {
+          redirect_uri: `${process.env.NEXTAUTH_URL}/api/auth/callback/42-school`
+        }
+      },
       profile(profile) {
         return {
           id: profile.id.toString(),
